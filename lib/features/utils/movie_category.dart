@@ -1,4 +1,0 @@
-enum MovieCategory {
-  popular,
-  trending,
-}
