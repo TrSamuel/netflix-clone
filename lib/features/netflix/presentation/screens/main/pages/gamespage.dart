@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/hero_card_home.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/hero_card_home.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/item_row_view.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/item_row_view_top10.dart';
 
@@ -28,7 +28,7 @@ class Gamespage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            HeroCardHome(width: width),
+            HeroCardGame(width: width),
             ItemRowView(
               movieCategory: MovieCategory.nowPlaying,
               title: 'Now Playing Movies',
