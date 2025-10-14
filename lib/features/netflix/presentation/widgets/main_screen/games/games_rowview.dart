@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
+import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
+import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher.dart';
-import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/presentation/service/tvshow_fetcher.dart';
 
-class ItemRowView extends StatelessWidget {
+class GamesRowview extends StatelessWidget {
   final String title;
   final MovieCategory? movieCategory;
   final TvShowCategory? tvShowCategory;
-  const ItemRowView({
+  const GamesRowview({
     super.key,
     required this.title,
     this.movieCategory,
@@ -101,16 +102,33 @@ class ItemRowView extends StatelessWidget {
                       (index) => Row(
                         children: [
                           SizedBox(width: 10),
-                          Container(
-                            width: 100,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath : (rowItemList[index] as TvShow).posterPath}}',
+                          Column(
+                            children: [
+                              Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath : (rowItemList[index] as TvShow).posterPath}}',
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              Text(
+                                "Game title",
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                "Game title",
+                                style: TextStyle(color: AppColors.whiteColor),
+                              ),
+                            ],
                           ),
                         ],
                       ),

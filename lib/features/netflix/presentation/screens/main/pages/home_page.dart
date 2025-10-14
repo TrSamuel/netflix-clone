@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/hero_card_home.dart';
@@ -20,11 +21,7 @@ class HomePage extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.only(top: width * 0.4),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: AlignmentGeometry.bottomCenter,
-            end: Alignment.topCenter,
-            colors: [Colors.black, Colors.blueGrey],
-          ),
+         color: AppColors.homeBgColor,
         ),
         child: Column(
           children: [
