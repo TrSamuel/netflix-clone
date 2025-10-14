@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
-import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
-import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
+import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/games_rowview.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/hero_card_game.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/item_row_view.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/item_row_view_top10.dart';
 
 class Gamespage extends StatelessWidget {
   const Gamespage({super.key, required this.width});
@@ -23,12 +20,12 @@ class Gamespage extends StatelessWidget {
           children: [
             HeroCardGame(width: width),
             GamesRowview(
-              title: 'Card games',
-              movieCategory: MovieCategory.popular,
+              title: 'Anime games',
+             category: GameCategory.anime,
             ),
             GamesRowview(
               title: 'Card games',
-              movieCategory: MovieCategory.popular,
+             category:  GameCategory.card,
             ),
           ],
         ),

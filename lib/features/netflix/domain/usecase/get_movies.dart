@@ -7,7 +7,7 @@ class GetMovies {
 
   GetMovies({required this.movieRepo});
 
-  Future<List<Movie>> call(MovieCategory category) async {
+  Future<List<Movie>> call(MovieCategory category)  {
     switch (category) {
       case MovieCategory.popular:
         return movieRepo.getPopularMovies();

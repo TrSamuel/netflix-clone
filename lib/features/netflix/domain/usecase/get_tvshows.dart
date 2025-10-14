@@ -7,7 +7,7 @@ class GetTvshows {
 
   GetTvshows({required this.tvshowRepo});
 
-  Future<List<TvShow>> call(TvShowCategory category) async {
+  Future<List<TvShow>> call(TvShowCategory category)  {
     switch (category) {
       case TvShowCategory.airingToday:
         return tvshowRepo.getAiringTodayTvShows();

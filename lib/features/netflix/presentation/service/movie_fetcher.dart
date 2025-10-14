@@ -4,7 +4,7 @@ import 'package:netflixclone/features/netflix/domain/usecase/get_movies.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 
 class MovieFetcher {
-  static final GetMovies getmovieUsecase = GetMovies(movieRepo: MovieRepoImp());
+  static final GetMovies getmovieUsecase = GetMovies(movieRepo: MovieRepoImp.instance);
 
   static Future<List<Movie>> getMovies(MovieCategory category) async {
     switch (category) {

@@ -1,32 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
-import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
-import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
-import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher.dart';
-import 'package:netflixclone/features/netflix/presentation/service/tvshow_fetcher.dart';
+import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
+import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
+import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.dart';
 
 class GamesRowview extends StatelessWidget {
   final String title;
-  final MovieCategory? movieCategory;
-  final TvShowCategory? tvShowCategory;
-  const GamesRowview({
-    super.key,
-    required this.title,
-    this.movieCategory,
-    this.tvShowCategory,
-  });
+  final GameCategory category;
+  const GamesRowview({super.key, required this.title, required this.category});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: FutureBuilder(
-        future: movieCategory != null
-            ? MovieFetcher.getMovies(movieCategory!)
-            : TvshowFetcher.getTvShows(tvShowCategory!),
+        future: GameFetcher.getGames(category),
         builder: (context, snapshot) {
           if (!snapshot.hasData ||
               snapshot.hasError ||
@@ -79,7 +67,7 @@ class GamesRowview extends StatelessWidget {
               ),
             );
           } else {
-            final List rowItemList = snapshot.data!;
+            final List<Game> gamesList = snapshot.data!;
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -98,7 +86,7 @@ class GamesRowview extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: List.generate(
-                      rowItemList.length,
+                      gamesList.length,
                       (index) => Row(
                         children: [
                           SizedBox(width: 10),
@@ -111,21 +99,26 @@ class GamesRowview extends StatelessWidget {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(
-                                      '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath : (rowItemList[index] as TvShow).posterPath}}',
+                                      gamesList[index].thumbnail,
                                     ),
                                   ),
                                 ),
                               ),
-                              Text(
-                                "Game title",
-                                style: TextStyle(
-                                  color: AppColors.whiteColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                              Container(
+                                width: 100,
+                                child: Text(
+                                  overflow: TextOverflow.fade,
+                                  maxLines: 1,
+                                  gamesList[index].title,
+                                  style: TextStyle(
+                                    color: AppColors.whiteColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                               Text(
-                                "Game title",
+                                gamesList[index].genre,
                                 style: TextStyle(color: AppColors.whiteColor),
                               ),
                             ],

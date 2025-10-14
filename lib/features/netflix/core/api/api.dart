@@ -4,8 +4,8 @@ class Api {
   static const movieBaseUrl = 'https://api.themoviedb.org/3/movie';
   static const trendingMovieBaseUrl =
       'https://api.themoviedb.org/3/trending/movie';
-        static const trendingTvBaseUrl =
-      'https://api.themoviedb.org/3/trending/tv';
+  static const trendingTvBaseUrl = 'https://api.themoviedb.org/3/trending/tv';
   static const tvBaseUrl = 'https://api.themoviedb.org/3/tv';
   static const imageBaseUrl = 'https://image.tmdb.org/t/p/w1280';
+  static const gameUrl = 'https://www.freetogame.com/api/games?category';
 }
