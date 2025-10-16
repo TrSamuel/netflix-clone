@@ -85,7 +85,7 @@ class MainScreen extends StatelessWidget {
       body: Stack(
         children: [
           BuildPageWidget(pages: pages),
-          MovieDetailsView(),
+          MovieDetailsView(movieId: 0,),
         ],
       ),
       extendBodyBehindAppBar: true,
