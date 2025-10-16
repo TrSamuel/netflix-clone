@@ -8,21 +8,6 @@ class GetGames {
   GetGames({required this.gameRepo});
 
   Future<List<Game>> call(GameCategory category) {
-    switch (category) {
-      case GameCategory.anime:
-        return gameRepo.animeGames();
-      case GameCategory.shooter:
-        return gameRepo.shooterGames();
-      case GameCategory.racing:
-        return gameRepo.racingGames();
-      case GameCategory.sports:
-        return gameRepo.sportsGames();
-      case GameCategory.fighting:
-        return gameRepo.fightingGames();
-      case GameCategory.card:
-        return gameRepo.cardGames();
-      case GameCategory.fantacy:
-        return gameRepo.fanctacyGames();
-    }
+        return gameRepo.getGames(category);
   }
 }

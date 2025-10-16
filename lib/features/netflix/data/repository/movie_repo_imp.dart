@@ -13,32 +13,9 @@ class MovieRepoImp extends MovieRepo {
   final MovieApiService movieSource = MovieApiService.instance;
 
   @override
-  Future<List<Movie>> getPopularMovies() async {
-    return await movieSource.getMovies(MovieCategory.popular);
+  Future<List<Movie>> getMovies(MovieCategory category) async {
+    return await movieSource.getMovies(category);
   }
 
-  @override
-  Future<List<Movie>> getNowPlayingMovies() async {
-    return await movieSource.getMovies(MovieCategory.nowPlaying);
-  }
-
-  @override
-  Future<List<Movie>> getTopRated() async {
-    return await movieSource.getMovies(MovieCategory.topRated);
-  }
-
-  @override
-  Future<List<Movie>> getTrendingMoviesDay() async {
-    return await movieSource.getMovies(MovieCategory.trendingDay);
-  }
-
-  @override
-  Future<List<Movie>> getTrendingMoviesWeek() async {
-    return await movieSource.getMovies(MovieCategory.trendingWeek);
-  }
-
-  @override
-  Future<List<Movie>> getUpcoming() async {
-    return await movieSource.getMovies(MovieCategory.upcoming);
-  }
+  
 }

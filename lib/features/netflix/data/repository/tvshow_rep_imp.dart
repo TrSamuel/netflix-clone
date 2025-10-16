@@ -15,35 +15,8 @@ class TvshowRepImp extends TvshowRepo {
   final TvshowApiService tvSource = TvshowApiService.instance;
 
   @override
-  Future<List<TvShow>> getAiringTodayTvShows() async{
-     return await tvSource.getTvShows(TvShowCategory.airingToday);
+  Future<List<TvShow>> getTvShows(TvShowCategory category) async{
+     return await tvSource.getTvShows(category);
   }
-
-  @override
-  Future<List<TvShow>> getOntheAirTvShows() async {
-   return await tvSource.getTvShows(TvShowCategory.onTheAir);
-  
-  }
-
-  @override
-  Future<List<TvShow>> getPopularTvShows() async {
-    return await tvSource.getTvShows(TvShowCategory.popular);
-  }
-
-  @override
-  Future<List<TvShow>> getTopRatedTvShows() async {
-       return await tvSource.getTvShows(TvShowCategory.topRated);
-  }
-
-  @override
-  Future<List<TvShow>> getTrendingTvShowsDay() async {
-  return await tvSource.getTvShows(TvShowCategory.trendingDay);
-  }
-
-  @override
-  Future<List<TvShow>> getTrendingTvShowsWeek() async {
-return await tvSource.getTvShows(TvShowCategory.trendingWeek);
-  }
-
   
 }

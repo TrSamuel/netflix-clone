@@ -20,7 +20,6 @@ class NetflixApp extends StatelessWidget {
       child: MaterialApp(
         theme: AppTheme.themeData,
         debugShowCheckedModeBanner: false,
-        
         home: MainScreen(),
       ),
     );

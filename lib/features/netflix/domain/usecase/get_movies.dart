@@ -8,19 +8,6 @@ class GetMovies {
   GetMovies({required this.movieRepo});
 
   Future<List<Movie>> call(MovieCategory category)  {
-    switch (category) {
-      case MovieCategory.popular:
-        return movieRepo.getPopularMovies();
-      case MovieCategory.trendingDay:
-        return movieRepo.getTrendingMoviesDay();
-      case MovieCategory.trendingWeek:
-        return movieRepo.getTrendingMoviesWeek();
-      case MovieCategory.nowPlaying:
-        return movieRepo.getNowPlayingMovies();
-      case MovieCategory.topRated:
-        return movieRepo.getTopRated();
-      case MovieCategory.upcoming:
-        return movieRepo.getUpcoming();
-    }
+        return movieRepo.getMovies(category);
   }
 }

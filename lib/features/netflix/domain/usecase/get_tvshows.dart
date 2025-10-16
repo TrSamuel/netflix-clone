@@ -8,19 +8,7 @@ class GetTvshows {
   GetTvshows({required this.tvshowRepo});
 
   Future<List<TvShow>> call(TvShowCategory category)  {
-    switch (category) {
-      case TvShowCategory.airingToday:
-        return tvshowRepo.getAiringTodayTvShows();
-      case TvShowCategory.topRated:
-        return tvshowRepo.getTopRatedTvShows();
-      case TvShowCategory.popular:
-        return tvshowRepo.getPopularTvShows();
-      case TvShowCategory.onTheAir:
-        return tvshowRepo.getOntheAirTvShows();
-      case TvShowCategory.trendingDay:
-        return tvshowRepo.getTrendingTvShowsDay();
-      case TvShowCategory.trendingWeek:
-        return tvshowRepo.getTrendingTvShowsWeek();
-    }
+        return tvshowRepo.getTvShows(category);
+    
   }
 }

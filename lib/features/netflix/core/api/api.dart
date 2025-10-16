@@ -7,5 +7,6 @@ class Api {
   static const trendingTvBaseUrl = 'https://api.themoviedb.org/3/trending/tv';
   static const tvBaseUrl = 'https://api.themoviedb.org/3/tv';
   static const imageBaseUrl = 'https://image.tmdb.org/t/p/w1280';
-  static const gameUrl = 'https://www.freetogame.com/api/games?category';
+    static const gamesBaseUrl = 'https://www.freetogame.com/api/games';
+  static const gamesFindUrl = 'https://www.freetogame.com/api/games?category';
 }

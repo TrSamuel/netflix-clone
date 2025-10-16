@@ -13,37 +13,8 @@ class GameRepoImp extends GameRepo {
   final GameApiService _gameApiService = GameApiService.instance;
 
   @override
-  Future<List<Game>> animeGames() async {
-    return await _gameApiService.getGames(GameCategory.anime);
+  Future<List<Game>> getGames(GameCategory category) async {
+    return await _gameApiService.getGames(category);
   }
 
-  @override
-  Future<List<Game>> cardGames() async {
-    return await _gameApiService.getGames(GameCategory.card);
-  }
-
-  @override
-  Future<List<Game>> fanctacyGames() async {
-    return await _gameApiService.getGames(GameCategory.fantacy);
-  }
-
-  @override
-  Future<List<Game>> fightingGames() async {
-    return await _gameApiService.getGames(GameCategory.fighting);
-  }
-
-  @override
-  Future<List<Game>> racingGames() async {
-    return await _gameApiService.getGames(GameCategory.racing);
-  }
-
-  @override
-  Future<List<Game>> shooterGames() async {
-    return await _gameApiService.getGames(GameCategory.shooter);
-  }
-
-  @override
-  Future<List<Game>> sportsGames() async {
-    return await _gameApiService.getGames(GameCategory.sports);
-  }
 }

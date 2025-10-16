@@ -22,8 +22,20 @@ class GameFetcher {
              return await getGamesuseCase(GameCategory.fighting);
       case GameCategory.card:
              return await getGamesuseCase(GameCategory.card);
-      case GameCategory.fantacy:
-             return await getGamesuseCase(GameCategory.fantacy);
+      case GameCategory.fantasy:
+             return await getGamesuseCase(GameCategory.fantasy);
+      case GameCategory.strategy:
+       return await getGamesuseCase(GameCategory.strategy);
+      case GameCategory.sciFi:
+       return await getGamesuseCase(GameCategory.sciFi);
+      case GameCategory.moba:
+       return await getGamesuseCase(GameCategory.moba);
+      case GameCategory.mmorpg:
+       return await getGamesuseCase(GameCategory.mmorpg);
+      case GameCategory.battleRoyale:
+        return await getGamesuseCase(GameCategory.battleRoyale);
+      case GameCategory.all:
+       return await getGamesuseCase(GameCategory.all);
     }
   }
 }

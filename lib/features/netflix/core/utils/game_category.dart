@@ -1,9 +1,15 @@
 enum GameCategory {
+  all,
   shooter,
   anime,
   racing,
   sports,
   fighting,
   card,
-  fantacy,
+  fantasy,
+  strategy,
+  sciFi,
+  moba,
+  mmorpg,
+  battleRoyale
 }

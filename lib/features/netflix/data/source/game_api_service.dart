@@ -28,13 +28,25 @@ class GameApiService {
           type = 'fighting';
         case GameCategory.card:
           type = 'card';
-        case GameCategory.fantacy:
-          type = 'fantacy';
+        case GameCategory.fantasy:
+          type = 'fantasy';
+        case GameCategory.strategy:
+          type = 'strategy';
+        case GameCategory.sciFi:
+          type = 'sci-fi';
+        case GameCategory.moba:
+          type = 'moba';
+        case GameCategory.mmorpg:
+          type = 'mmorpg';
+        case GameCategory.battleRoyale:
+          type = 'battle-royale';
+        case GameCategory.all:
+           type = '';
       }
 
-      final response = await http.get(
-        Uri.parse('${Api.gameUrl}=$type'),
-      );
+      final url=type.isEmpty?Api.gamesBaseUrl:'${Api.gamesFindUrl}=$type';
+
+      final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
         debugPrint('${cateogry.name} games : successful response');
@@ -43,9 +55,13 @@ class GameApiService {
 
         return results.map((json) => GameModel.fromJson(json)).toList();
       }
-      if (response.statusCode == 503) {
+      if (response.statusCode == 404) {
         debugPrint(
-          '${cateogry.name} games: This service is temporarily offline, try again later.',
+          '${cateogry.name} Games not found.',
+        );
+      }if (response.statusCode == 500) {
+        debugPrint(
+          '${cateogry.name} Games- server error',
         );
       }
 

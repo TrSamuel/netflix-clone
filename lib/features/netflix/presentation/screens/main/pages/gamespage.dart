@@ -19,13 +19,32 @@ class Gamespage extends StatelessWidget {
         child: Column(
           children: [
             HeroCardGame(width: width),
+
+            GamesRowview(title: 'Card games', category: GameCategory.card),
+            GamesRowview(title: 'Anime games', category: GameCategory.anime),
             GamesRowview(
-              title: 'Anime games',
-             category: GameCategory.anime,
+              title: 'Fantasy games',
+              category: GameCategory.fantasy,
             ),
             GamesRowview(
-              title: 'Card games',
-             category:  GameCategory.card,
+              title: 'Fighting games',
+              category: GameCategory.fighting,
+            ),
+            GamesRowview(title: 'Racing games', category: GameCategory.racing),
+            GamesRowview(
+              title: 'Shooter games',
+              category: GameCategory.shooter,
+            ),
+            GamesRowview(title: 'Sci-Fi games', category: GameCategory.sciFi),
+            GamesRowview(
+              title: 'Strategy games',
+              category: GameCategory.strategy,
+            ),
+            GamesRowview(title: 'MOBA games', category: GameCategory.moba),
+            GamesRowview(title: 'MMORPG games', category: GameCategory.mmorpg),
+            GamesRowview(
+              title: 'Battle Royale games',
+              category: GameCategory.battleRoyale,
             ),
           ],
         ),
