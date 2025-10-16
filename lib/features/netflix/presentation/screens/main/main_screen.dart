@@ -7,6 +7,7 @@ import 'package:netflixclone/features/netflix/presentation/screens/main/pages/my
 import 'package:netflixclone/features/netflix/presentation/screens/main/pages/new_hot_page.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/build_page_widget.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/movie_details_view.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/netflix_logo.dart';
 import 'package:provider/provider.dart';
 
@@ -81,7 +82,12 @@ class MainScreen extends StatelessWidget {
         ),
       ),
 
-      body: BuildPageWidget(pages: pages),
+      body: Stack(
+        children: [
+          BuildPageWidget(pages: pages),
+          MovieDetailsView(),
+        ],
+      ),
       extendBodyBehindAppBar: true,
       bottomNavigationBar: BottomNavBarWidget(),
     );
