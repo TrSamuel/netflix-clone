@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
@@ -11,60 +12,56 @@ class GamesRowview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final future = GameFetcher.getGames(category);
     return SizedBox(
       width: double.infinity,
       child: FutureBuilder(
-        future: GameFetcher.getGames(category),
+        future: future,
         builder: (context, snapshot) {
           if (!snapshot.hasData ||
               snapshot.hasError ||
               snapshot.data!.isEmpty) {
             return SizedBox.shrink();
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return Row(
-              children: List.generate(
-                10,
-                (index) => Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: List.generate(
-                          10,
-                          (index) => Row(
-                            children: [
-                              SizedBox(width: 10),
-                              Container(
-                                width: 100,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      const Color.fromARGB(255, 40, 40, 40),
-                                      const Color.fromARGB(255, 66, 66, 66),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(
+                      10,
+                      (index) => Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  const Color.fromARGB(255, 40, 40, 40),
+                                  const Color.fromARGB(255, 66, 66, 66),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             );
           } else {
             final List<Game> gamesList = snapshot.data!;
@@ -92,19 +89,37 @@ class GamesRowview extends StatelessWidget {
                           SizedBox(width: 10),
                           Column(
                             children: [
-                              Container(
+                              CachedNetworkImage(
                                 width: 100,
                                 height: 100,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      gamesList[index].thumbnail,
+                                memCacheHeight: 200,
+                                memCacheWidth: 200,
+                                imageUrl: gamesList[index].thumbnail,
+                                placeholder: (context, url) => Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [Colors.black, Colors.blueGrey],
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: SizedBox(
+                                      width: 16,
+                                      height: 16,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
+                                errorWidget: (context, url, error) => Icon(
+                                  Icons.error,
+                                  color: const Color.fromARGB(255, 29, 28, 28),
+                                ),
+                                fit: BoxFit.cover,
                               ),
-                              Container(
+
+                              SizedBox(
                                 width: 100,
                                 child: Text(
                                   overflow: TextOverflow.fade,

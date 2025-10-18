@@ -3,16 +3,15 @@ import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_pr
 import 'package:provider/provider.dart';
 
 class BuildPageWidget extends StatelessWidget {
-  const BuildPageWidget({
-    super.key,
-    required this.pages,
-  });
+  const BuildPageWidget({super.key, required this.pages});
 
-  final List<StatelessWidget> pages;
+  final List<Widget> pages;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<BottomnavProvider>(
-      builder: (_, instance, _) =>  pages[instance.index]);
+      builder: (_, instance, _) =>
+          IndexedStack(index: instance.index, children: pages),
+    );
   }
 }

@@ -38,6 +38,7 @@ class HeroCardGame extends StatelessWidget {
             ),
           ),
         ),
+
         SizedBox(
           width: kWidth,
           height: 500,

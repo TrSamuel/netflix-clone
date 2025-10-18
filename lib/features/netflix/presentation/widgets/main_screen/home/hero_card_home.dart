@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class HeroCardHome extends StatelessWidget {
@@ -14,7 +15,7 @@ class HeroCardHome extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: NetworkImage(
+          image: CachedNetworkImageProvider(
             'https://image.tmdb.org/t/p/original/j6M2odS1RqGEUPKirIvB1VZ9i6Y.jpg',
           ),
         ),

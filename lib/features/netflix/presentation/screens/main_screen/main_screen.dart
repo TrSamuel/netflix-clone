@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_provider.dart';
-import 'package:netflixclone/features/netflix/presentation/screens/main/pages/gamespage.dart';
-import 'package:netflixclone/features/netflix/presentation/screens/main/pages/home_page.dart';
-import 'package:netflixclone/features/netflix/presentation/screens/main/pages/my_netflix_page.dart';
-import 'package:netflixclone/features/netflix/presentation/screens/main/pages/new_hot_page.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/bottom_nav_bar_widget.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/gamespage.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/home_page.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/my_netflix_page.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/new_hot_page.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/build_page_widget.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/movie_details_view.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/netflix_logo.dart';
 import 'package:provider/provider.dart';
 
@@ -82,14 +81,9 @@ class MainScreen extends StatelessWidget {
         ),
       ),
 
-      body: Stack(
-        children: [
-          BuildPageWidget(pages: pages),
-          MovieDetailsView(movieId: 0,),
-        ],
-      ),
+      body: BuildPageWidget(pages: pages),
       extendBodyBehindAppBar: true,
-      bottomNavigationBar: BottomNavBarWidget(),
+      bottomNavigationBar: BottomNavBarWidget(isPreviewScreen: false,),
     );
   }
 }

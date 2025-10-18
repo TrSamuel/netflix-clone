@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_provider.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/main_screen/main_screen.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavBarWidget extends StatelessWidget {
-  const BottomNavBarWidget({
-    super.key,
-  });
+  final bool isPreviewScreen;
+  const BottomNavBarWidget({super.key, required this.isPreviewScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +15,7 @@ class BottomNavBarWidget extends StatelessWidget {
         currentIndex: instance.index,
         onTap: (index) {
           instance.changeIndex(index);
+          if(isPreviewScreen)Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
         },
         type: BottomNavigationBarType.fixed,
         items: [
