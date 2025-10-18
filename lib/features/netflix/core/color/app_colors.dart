@@ -7,4 +7,5 @@ class AppColors {
   static Color greyColor = Colors.grey;
   static Color homeBgColor = Colors.blueGrey;
   static Color otherBgColor = Colors.black;
+  static Color redColor = const Color.fromARGB(255, 143, 10, 19);
 }

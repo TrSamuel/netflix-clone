@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
+import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/games_rowview.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/games_rowviewtop10.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/hero_card_home.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/item_row_view.dart';
@@ -16,7 +18,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -28,6 +31,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
         child: Column(
           children: [
             HeroCardHome(width: widget.width),
+
             ItemRowView(
               movieCategory: MovieCategory.nowPlaying,
               title: 'Now Playing Movies',
@@ -43,6 +47,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
             ItemRowView(
               movieCategory: MovieCategory.comedy,
               title: 'Comedy Movies',
+            ),
+            GamesRowview(
+              category: GameCategory.all,
+              title: "Mobile games",
+              isSeeAll: true,
             ),
             ItemRowView(
               movieCategory: MovieCategory.upcoming,
@@ -114,7 +123,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
       ),
     );
   }
-  
+
   @override
   bool get wantKeepAlive => true;
 }

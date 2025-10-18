@@ -116,15 +116,7 @@ class ItemRowViewTop10 extends StatelessWidget {
                                         placeholder: (context, url) =>
                                             LoadingItemContainer(),
                                         errorWidget: (context, url, error) =>
-                                            Icon(
-                                              Icons.error,
-                                              color: const Color.fromARGB(
-                                                255,
-                                                29,
-                                                28,
-                                                28,
-                                              ),
-                                            ),
+                                           LoadingItemContainer(),
                                         fit: BoxFit.cover,
                                       ),
                                     ),

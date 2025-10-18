@@ -101,15 +101,7 @@ class ItemRowView extends StatelessWidget {
                                     imageUrl:
                                         '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath : (rowItemList[index] as TvShow).posterPath}',
                                     placeholder: (context, url) => LoadingItemContainer(),
-                                    errorWidget: (context, url, error) => Icon(
-                                      Icons.error,
-                                      color: const Color.fromARGB(
-                                        255,
-                                        29,
-                                        28,
-                                        28,
-                                      ),
-                                    ),
+                                    errorWidget: (context, url, error) => LoadingItemContainer(),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
