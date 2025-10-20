@@ -16,5 +16,4 @@ class GameRepoImp extends GameRepo {
   Future<List<Game>> getGames(GameCategory category) async {
     return await _gameApiService.getGames(category);
   }
-
 }

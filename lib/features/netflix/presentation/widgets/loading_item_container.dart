@@ -21,7 +21,7 @@ class _LoadingItemState extends State<LoadingItemContainer> {
         begin = begin == Alignment.bottomLeft
             ? Alignment.topRight
             : Alignment.bottomLeft;
-        ;
+        
         end = end == Alignment.topRight
             ? Alignment.bottomLeft
             : Alignment.topRight;
@@ -43,7 +43,10 @@ class _LoadingItemState extends State<LoadingItemContainer> {
         gradient: LinearGradient(
           begin: begin,
           end: end,
-          colors: [const Color.fromARGB(255, 55, 63, 67), const Color.fromARGB(255, 82, 100, 109)],
+          colors: [
+            const Color.fromARGB(255, 55, 63, 67),
+            const Color.fromARGB(255, 82, 100, 109),
+          ],
         ),
       ),
     );

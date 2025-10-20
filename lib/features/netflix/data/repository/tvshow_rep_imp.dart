@@ -1,5 +1,3 @@
-
-
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/data/source/tvshow_api_service.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
@@ -15,8 +13,7 @@ class TvshowRepImp extends TvshowRepo {
   final TvshowApiService tvSource = TvshowApiService.instance;
 
   @override
-  Future<List<TvShow>> getTvShows(TvShowCategory category) async{
-     return await tvSource.getTvShows(category);
+  Future<List<TvShow>> getTvShows(TvShowCategory category) async {
+    return await tvSource.getTvShows(category);
   }
-  
 }

@@ -5,4 +5,5 @@ import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.
 abstract class MovieRepo {
   Future<List<Movie>> getMovies(MovieCategory category);
   Future<MovieDetails?> getMovieDetails(int id);
+  Future<List<Movie>> getRecommendMovies(int id);
 }

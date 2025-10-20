@@ -6,5 +6,5 @@ class GetMoviedetails {
 
   GetMoviedetails({required this.movieRepo});
 
-  Future<MovieDetails?>  call(int id)=>  movieRepo.getMovieDetails(id);
+  Future<MovieDetails?> call(int id) => movieRepo.getMovieDetails(id);
 }

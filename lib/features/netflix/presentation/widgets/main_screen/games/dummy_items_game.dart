@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_provider.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/loading_item_container.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/loading_item_container.dart';
 import 'package:provider/provider.dart';
 
 class DummyItemsGame extends StatelessWidget {

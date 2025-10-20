@@ -7,7 +7,7 @@ class GetMovies {
 
   GetMovies({required this.movieRepo});
 
-  Future<List<Movie>> call(MovieCategory category)  {
-        return movieRepo.getMovies(category);
+  Future<List<Movie>> call(MovieCategory category) {
+    return movieRepo.getMovies(category);
   }
 }

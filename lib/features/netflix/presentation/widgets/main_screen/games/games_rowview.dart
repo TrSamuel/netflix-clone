@@ -7,7 +7,7 @@ import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/dummy_items_game.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/loading_item_container.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/loading_item_container.dart';
 import 'package:provider/provider.dart';
 
 class GamesRowview extends StatelessWidget {
@@ -58,7 +58,10 @@ class GamesRowview extends StatelessWidget {
                   if (isSeeAll)
                     TextButton.icon(
                       onPressed: () {
-                        Provider.of<BottomnavProvider>(context,listen: false).changeIndex(1);
+                        Provider.of<BottomnavProvider>(
+                          context,
+                          listen: false,
+                        ).changeIndex(1);
                       },
                       label: Text("See All"),
                       icon: Icon(Icons.arrow_forward_ios),

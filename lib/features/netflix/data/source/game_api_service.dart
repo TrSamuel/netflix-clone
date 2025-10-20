@@ -41,10 +41,10 @@ class GameApiService {
         case GameCategory.battleRoyale:
           type = 'battle-royale';
         case GameCategory.all:
-           type = '';
+          type = '';
       }
 
-      final url=type.isEmpty?Api.gamesBaseUrl:'${Api.gamesFindUrl}=$type';
+      final url = type.isEmpty ? Api.gamesBaseUrl : '${Api.gamesFindUrl}=$type';
 
       final response = await http.get(Uri.parse(url));
 
@@ -56,13 +56,10 @@ class GameApiService {
         return results.map((json) => GameModel.fromJson(json)).toList();
       }
       if (response.statusCode == 404) {
-        debugPrint(
-          '${cateogry.name} Games not found.',
-        );
-      }if (response.statusCode == 500) {
-        debugPrint(
-          '${cateogry.name} Games- server error',
-        );
+        debugPrint('${cateogry.name} Games not found.');
+      }
+      if (response.statusCode == 500) {
+        debugPrint('${cateogry.name} Games- server error');
       }
 
       return [];

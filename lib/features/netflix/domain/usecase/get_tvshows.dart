@@ -7,8 +7,7 @@ class GetTvshows {
 
   GetTvshows({required this.tvshowRepo});
 
-  Future<List<TvShow>> call(TvShowCategory category)  {
-        return tvshowRepo.getTvShows(category);
-    
+  Future<List<TvShow>> call(TvShowCategory category) {
+    return tvshowRepo.getTvShows(category);
   }
 }

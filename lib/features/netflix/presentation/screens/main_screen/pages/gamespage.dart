@@ -13,7 +13,8 @@ class Gamespage extends StatefulWidget {
   State<Gamespage> createState() => _GamespageState();
 }
 
-class _GamespageState extends State<Gamespage> with AutomaticKeepAliveClientMixin{
+class _GamespageState extends State<Gamespage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -57,7 +58,7 @@ class _GamespageState extends State<Gamespage> with AutomaticKeepAliveClientMixi
       ),
     );
   }
-  
+
   @override
   bool get wantKeepAlive => true;
 }

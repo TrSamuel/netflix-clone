@@ -22,4 +22,9 @@ class MovieRepoImp extends MovieRepo {
   Future<MovieDetails?> getMovieDetails(int id) async {
     return await movieSource.getMovieDetails(id);
   }
+
+  @override
+  Future<List<Movie>> getRecommendMovies(int id) async {
+    return await movieSource.getRecommendMovies(id);
+  }
 }

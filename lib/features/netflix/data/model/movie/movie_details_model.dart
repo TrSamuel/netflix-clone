@@ -12,6 +12,7 @@ class MovieDetailsModel extends MovieDetails {
     required super.releaseDate,
     required super.tagline,
     required super.runTime,
+    required super.video,
   });
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) =>
@@ -31,10 +32,11 @@ class MovieDetailsModel extends MovieDetails {
             ? DateTime.now()
             : DateTime.parse(json['release_date']),
         tagline: json['tagline'] ?? '',
-        runTime: json['runtime']==null ? '':getTime(json['runtime'] as int),
+        runTime: json['runtime'] == null ? '' : getTime(json['runtime'] as int),
+        video: json['video'],
       );
 
- static String getTime(int time) {
+  static String getTime(int time) {
     int hr = time ~/ 60;
     int min = time % 60;
 

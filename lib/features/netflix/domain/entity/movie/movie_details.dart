@@ -9,6 +9,7 @@ class MovieDetails {
   final DateTime releaseDate;
   final String tagline;
   final String runTime;
+  final bool video;
 
   MovieDetails({
     required this.adult,
@@ -21,5 +22,6 @@ class MovieDetails {
     required this.releaseDate,
     required this.tagline,
     required this.runTime,
+    required this.video,
   });
 }

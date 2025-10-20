@@ -9,9 +9,9 @@ class GameModel extends Game {
   });
 
   factory GameModel.fromJson(Map<String, dynamic> json) => GameModel(
-    id: json['id']??0,                
-    title:json['title']??'',
-    thumbnail: json['thumbnail']??'',
-    genre: json['genre']??'',
+    id: json['id'] ?? 0,
+    title: json['title'] ?? '',
+    thumbnail: json['thumbnail'] ?? '',
+    genre: json['genre'] ?? '',
   );
 }

@@ -4,10 +4,18 @@ import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.
 import 'package:netflixclone/features/netflix/domain/usecase/get_moviedetails.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/get_movies.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
+import 'package:netflixclone/features/netflix/domain/usecase/get_recommendMovies.dart';
 
 class MovieFetcher {
-  static final GetMovies getmovieUsecase = GetMovies(movieRepo: MovieRepoImp.instance);
-    static final GetMoviedetails getmovieDetailsUsecase = GetMoviedetails(movieRepo: MovieRepoImp.instance);
+  static final GetMovies getmovieUsecase = GetMovies(
+    movieRepo: MovieRepoImp.instance,
+  );
+  static final GetMoviedetails getmovieDetailsUsecase = GetMoviedetails(
+    movieRepo: MovieRepoImp.instance,
+  );
+  static final GetRecommendmovies getRecommMoviesUseCase = GetRecommendmovies(
+    movieRepo: MovieRepoImp.instance,
+  );
 
   static Future<List<Movie>> getMovies(MovieCategory category) async {
     switch (category) {
@@ -46,6 +54,9 @@ class MovieFetcher {
     }
   }
 
-   static Future<MovieDetails?> getMovieDetails(int id) async =>
+  static Future<MovieDetails?> getMovieDetails(int id) async =>
       await getmovieDetailsUsecase(id);
+
+  static Future<List<Movie>> getRecommendMovies(int id) async =>
+      await getRecommMoviesUseCase(id);
 }

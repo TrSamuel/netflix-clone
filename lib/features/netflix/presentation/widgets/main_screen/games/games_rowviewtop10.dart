@@ -5,7 +5,7 @@ import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
 import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/dummy_items_game.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/loading_item_container.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/loading_item_container.dart';
 
 class GamesRowviewtop10 extends StatelessWidget {
   const GamesRowviewtop10({super.key});
@@ -69,8 +69,10 @@ class GamesRowviewtop10 extends StatelessWidget {
                                 memCacheHeight: 200,
                                 memCacheWidth: 200,
                                 imageUrl: gamesList[index].thumbnail,
-                                placeholder: (context, url) => LoadingItemContainer(),
-                                errorWidget: (context, url, error) => LoadingItemContainer(),
+                                placeholder: (context, url) =>
+                                    LoadingItemContainer(),
+                                errorWidget: (context, url, error) =>
+                                    LoadingItemContainer(),
                                 fit: BoxFit.cover,
                               ),
                             ),

@@ -12,7 +12,7 @@ import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher
 import 'package:netflixclone/features/netflix/presentation/service/tvshow_fetcher.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/custom_nav.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/dummy_items_home.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/loading_item_container.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/loading_item_container.dart';
 
 class ItemRowViewTop10 extends StatelessWidget {
   final MovieCategory? movieCategory;
@@ -65,7 +65,7 @@ class ItemRowViewTop10 extends StatelessWidget {
                     final bool imgStatus;
                     if (movieCategory != null) {
                       imgStatus =
-                          (rowItemList[index] as Movie).posterPath.isNotEmpty;
+                          (rowItemList[index] as Movie).posterPath!.isNotEmpty;
                     } else {
                       imgStatus =
                           (rowItemList[index] as TvShow).posterPath.isNotEmpty;
@@ -93,7 +93,7 @@ class ItemRowViewTop10 extends StatelessWidget {
                                           final MovieDetails? movieDetails =
                                               await MovieFetcher.getMovieDetails(
                                                 (rowItemList[index] as Movie)
-                                                    .id,
+                                                    .id!,
                                               );
                                           if (movieDetails != null) {
                                             Navigator.push(
@@ -118,7 +118,7 @@ class ItemRowViewTop10 extends StatelessWidget {
                                         placeholder: (context, url) =>
                                             LoadingItemContainer(),
                                         errorWidget: (context, url, error) =>
-                                           LoadingItemContainer(),
+                                            LoadingItemContainer(),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -138,4 +138,3 @@ class ItemRowViewTop10 extends StatelessWidget {
     );
   }
 }
-

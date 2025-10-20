@@ -8,6 +8,6 @@ class GetGames {
   GetGames({required this.gameRepo});
 
   Future<List<Game>> call(GameCategory category) {
-        return gameRepo.getGames(category);
+    return gameRepo.getGames(category);
   }
 }

@@ -12,7 +12,7 @@ class TvshowApiService {
   factory TvshowApiService() => instance;
 
   Future<List<TvShowModel>> getTvShows(TvShowCategory category) async {
-  try {
+    try {
       final String url;
 
       if (category == TvShowCategory.trendingDay ||
@@ -60,10 +60,14 @@ class TvshowApiService {
         return results.map((json) => TvShowModel.fromJson(json)).toList();
       }
       if (response.statusCode == 401) {
-        debugPrint(' Cannot fetch ${category.name} tv shows because of invalid api key');
+        debugPrint(
+          ' Cannot fetch ${category.name} tv shows because of invalid api key',
+        );
       }
       if (response.statusCode == 503) {
-        debugPrint('${category.name} tvshows: This service is temporarily offline, try again later.');
+        debugPrint(
+          '${category.name} tvshows: This service is temporarily offline, try again later.',
+        );
       }
 
       return [];
@@ -71,6 +75,5 @@ class TvshowApiService {
       debugPrint('Failed to fetch ${category.name} tvshows: $e');
       return [];
     }
-  
   }
 }

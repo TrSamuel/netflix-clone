@@ -11,5 +11,5 @@ enum GameCategory {
   sciFi,
   moba,
   mmorpg,
-  battleRoyale
+  battleRoyale,
 }

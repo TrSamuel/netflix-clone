@@ -4,7 +4,9 @@ import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart
 import 'package:netflixclone/features/netflix/domain/usecase/get_tvshows.dart';
 
 class TvshowFetcher {
-  static final GetTvshows getTvShowUseCase = GetTvshows(tvshowRepo: TvshowRepImp.instance);
+  static final GetTvshows getTvShowUseCase = GetTvshows(
+    tvshowRepo: TvshowRepImp.instance,
+  );
 
   static Future<List<TvShow>> getTvShows(TvShowCategory category) async {
     switch (category) {

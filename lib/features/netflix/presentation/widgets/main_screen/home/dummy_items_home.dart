@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/loading_item_container.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/loading_item_container.dart';
 
 class DummyItemsHome extends StatelessWidget {
   const DummyItemsHome({super.key, required this.title});
