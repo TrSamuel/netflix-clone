@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
+import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
@@ -107,6 +108,7 @@ class ItemRowViewTop10 extends StatelessWidget {
                                         }
                                       },
                                       child: CachedNetworkImage(
+                                        cacheManager: customCacheManager,
                                         width: 100,
                                         height: 150,
                                         memCacheHeight: 300,

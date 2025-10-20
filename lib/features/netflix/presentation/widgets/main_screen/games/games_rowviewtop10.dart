@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
 import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.dart';
@@ -62,6 +63,7 @@ class GamesRowviewtop10 extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(left: 35),
                               child: CachedNetworkImage(
+                                cacheManager: customCacheManager,
                                 width: 100,
                                 height: 100,
                                 memCacheHeight: 200,

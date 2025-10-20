@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
+import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_provider.dart';
@@ -83,6 +84,7 @@ class GamesRowview extends StatelessWidget {
                         Column(
                           children: [
                             CachedNetworkImage(
+                              cacheManager: customCacheManager,
                               width: 100,
                               height: 100,
                               memCacheHeight: 200,

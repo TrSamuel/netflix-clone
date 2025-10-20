@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 
 class HeroCardHome extends StatelessWidget {
   const HeroCardHome({super.key, required this.width});
@@ -16,6 +17,7 @@ class HeroCardHome extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.cover,
           image: CachedNetworkImageProvider(
+            cacheManager: customCacheManager,
             'https://image.tmdb.org/t/p/original/j6M2odS1RqGEUPKirIvB1VZ9i6Y.jpg',
           ),
         ),

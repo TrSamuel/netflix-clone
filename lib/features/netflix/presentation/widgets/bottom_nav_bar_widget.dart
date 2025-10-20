@@ -15,7 +15,12 @@ class BottomNavBarWidget extends StatelessWidget {
         currentIndex: instance.index,
         onTap: (index) {
           instance.changeIndex(index);
-          if(isPreviewScreen)Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
+          if (isPreviewScreen) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MainScreen()),
+            );
+          }
         },
         type: BottomNavigationBarType.fixed,
         items: [
@@ -23,10 +28,11 @@ class BottomNavBarWidget extends StatelessWidget {
             icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.game_controller),
-            label: 'Games',
-          ),
+          if (!isPreviewScreen)
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.game_controller),
+              label: 'Games',
+            ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.flame),
             label: 'New & Hot',

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
+import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/main_action_button.dart';
@@ -30,6 +31,7 @@ class MovieDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CachedNetworkImage(
+                cacheManager: customCacheManager,
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
@@ -160,46 +162,49 @@ class TrailerAndRecommends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 35),
-        child: Column(
-          children: [
-            TabBar(
-              labelColor: AppColors.whiteColor,
-              indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(width: 4, color: AppColors.redColor),
-                insets: EdgeInsetsGeometry.symmetric(horizontal: width * 0.3),
-              ),
-              tabs: [
-                Tab(text: 'More like this'),
-                Tab(text: 'Trailers & More'),
-              ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 35),
+      child: Column(
+        children: [
+          TabBar(
+            labelColor: AppColors.whiteColor,
+            indicator: UnderlineTabIndicator(
+              borderSide: BorderSide(width: 4, color: AppColors.redColor),
+              insets: EdgeInsetsGeometry.symmetric(horizontal: width * 0.3),
             ),
-            Container(
-              width: double.infinity,
-              child: TabBarView(
-                children: [
-                  GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
-                    crossAxisCount: 3,
-                    children: List.generate(
-                      50,
-                      (index) => CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        width: width * 0.3,
-                        height: 200,
-                        imageUrl:
-                            'https://image.tmdb.org/t/p/original/j6M2odS1RqGEUPKirIvB1VZ9i6Y.jpg',
-                      ),
+            tabs: [
+              Tab(text: 'More like this'),
+              Tab(text: 'Trailers & More'),
+            ],
+          ),
+          Container(
+            width: double.infinity,
+            height: 500,
+            child: TabBarView(
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  crossAxisCount: 3,
+                  childAspectRatio: 1 / 1.5,
+                  children: List.generate(
+                    12,
+                    (index) => CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      width: width * 0.3,
+                      height: 200,
+                      imageUrl:
+                          'https://image.tmdb.org/t/p/original/j6M2odS1RqGEUPKirIvB1VZ9i6Y.jpg',
                     ),
                   ),
-                  Text("hai"),
-                ],
-              ),
+                ),
+                Text("hai"),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

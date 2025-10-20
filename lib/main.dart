@@ -4,6 +4,9 @@ import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_pr
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/main_screen.dart';
 import 'package:provider/provider.dart';
 
+
+
+
 Future<void> main() async {
   runApp(NetflixApp());
 
