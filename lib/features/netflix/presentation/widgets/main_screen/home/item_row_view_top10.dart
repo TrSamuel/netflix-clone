@@ -30,6 +30,7 @@ class ItemRowViewTop10 extends StatelessWidget {
     final future = movieCategory != null
         ? MovieFetcher.getMovies(movieCategory!)
         : TvshowFetcher.getTvShows(tvShowCategory!);
+    late bool imgStatus;
     return SizedBox(
       width: double.infinity,
       child: FutureBuilder(
@@ -58,11 +59,12 @@ class ItemRowViewTop10 extends StatelessWidget {
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(10, (index) {
-                    final bool imgStatus;
+              Container(
+                height: 150,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: rowItemList.length,
+                  itemBuilder: (context, index) {
                     if (movieCategory != null) {
                       imgStatus =
                           (rowItemList[index] as Movie).posterPath!.isNotEmpty;
@@ -71,64 +73,60 @@ class ItemRowViewTop10 extends StatelessWidget {
                           (rowItemList[index] as TvShow).posterPath.isNotEmpty;
                     }
                     return imgStatus
-                        ? Row(
+                        ? Stack(
+                            alignment: Alignment.bottomLeft,
                             children: [
-                              SizedBox(width: 10),
-                              Stack(
-                                alignment: Alignment.bottomLeft,
-                                children: [
-                                  Text(
-                                    "${index + 1}",
+                              Text(
+                                "${index + 1}",
 
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 54,
-                                    ),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 54,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 35),
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    if (movieCategory != null) {
+                                      final MovieDetails? movieDetails =
+                                          await MovieFetcher.getMovieDetails(
+                                            (rowItemList[index] as Movie).id!,
+                                          );
+                                      if (movieDetails != null) {
+                                        Navigator.push(
+                                          context,
+                                          CustomNav(
+                                            page: MovieDetailsScreen(
+                                              movieDetails: movieDetails,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  },
+                                  child: CachedNetworkImage(
+                                    cacheManager: customCacheManager,
+                                    width: 100,
+                                    height: 150,
+                                    memCacheHeight: 300,
+                                    memCacheWidth: 200,
+                                    imageUrl:
+                                        '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath! : (rowItemList[index] as TvShow).posterPath}',
+                                    placeholder: (context, url) =>
+                                        LoadingItemContainer(),
+                                    errorWidget: (context, url, error) =>
+                                        LoadingItemContainer(),
+                                    fit: BoxFit.cover,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 35),
-                                    child: GestureDetector(
-                                      onTap: () async {
-                                        if (movieCategory != null) {
-                                          final MovieDetails? movieDetails =
-                                              await MovieFetcher.getMovieDetails(
-                                                (rowItemList[index] as Movie)
-                                                    .id!,
-                                              );
-                                          if (movieDetails != null) {
-                                            Navigator.push(
-                                              context,
-                                              CustomNav(
-                                                page: MovieDetailsScreen(
-                                                  movieDetails: movieDetails,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                        }
-                                      },
-                                      child: CachedNetworkImage(
-                                        cacheManager: customCacheManager,
-                                        width: 100,
-                                        height: 150,
-                                        memCacheHeight: 300,
-                                        memCacheWidth: 200,
-                                        imageUrl:
-                                            '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath : (rowItemList[index] as TvShow).posterPath}',
-                                        placeholder: (context, url) =>
-                                            LoadingItemContainer(),
-                                        errorWidget: (context, url, error) =>
-                                            LoadingItemContainer(),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           )
                         : SizedBox.shrink();
-                  }),
+                  },
+                  separatorBuilder: (context, index) =>
+                      imgStatus ? SizedBox(width: 10) : SizedBox.shrink(),
                 ),
               ),
             ],

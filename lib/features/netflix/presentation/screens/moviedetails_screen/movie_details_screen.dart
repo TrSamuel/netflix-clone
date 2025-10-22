@@ -39,12 +39,12 @@ class MovieDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
-                imageUrl: '${Api.imageBaseUrl}/${movieDetails.backdropPath}',
+                imageUrl: '${Api.imageBaseUrl}/${movieDetails.backdropPath!}',
                 placeholder: (context, url) => Container(
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      movieDetails.originalTitle,
+                      movieDetails.originalTitle!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      movieDetails.originalTitle,
+                      movieDetails.originalTitle!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movieDetails.title,
+                      movieDetails.title!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontSize: 28,
@@ -89,24 +89,27 @@ class MovieDetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${movieDetails.releaseDate.year}',
+                            '${movieDetails.releaseDate!.year}',
                             style: TextStyle(color: AppColors.whiteColor),
                           ),
                           Text(
-                            movieDetails.adult ? 'A' : "U/A 16+",
+                            movieDetails.adult! ? 'A' : "U/A 16+",
                             style: TextStyle(
                               color: AppColors.whiteColor,
                               backgroundColor: AppColors.greyColor,
                             ),
                           ),
                           Text(
-                            movieDetails.runTime,
+                            movieDetails.runTime!,
                             style: TextStyle(color: AppColors.whiteColor),
                           ),
                         ],
                       ),
                     ),
-
+                    Text(
+                      "Watch in ${movieDetails.languages.take(2).join(' and ')}",
+                      style: TextStyle(color: AppColors.whiteColor),
+                    ),
                     MainActionButton(
                       width: width,
                       icon: Icons.play_arrow,
@@ -122,12 +125,17 @@ class MovieDetailsScreen extends StatelessWidget {
                       fgColor: AppColors.whiteColor,
                     ),
                     Text(
-                      movieDetails.overview,
+                      movieDetails.overview!,
                       style: TextStyle(
                         fontSize: 16,
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.w600,
                       ),
+                    ),
+                    Starring(movieDetails: movieDetails),
+                    Text(
+                      "Director: ${movieDetails.director!}",
+                      style: TextStyle(color: AppColors.greyColor),
                     ),
                     Row(
                       children: [
@@ -154,6 +162,37 @@ class MovieDetailsScreen extends StatelessWidget {
         ),
         bottomNavigationBar: BottomNavBarWidget(isPreviewScreen: true),
       ),
+    );
+  }
+}
+
+class Starring extends StatelessWidget {
+  const Starring({super.key, required this.movieDetails});
+
+  final MovieDetails movieDetails;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Flexible(
+          flex: 3,
+          child: Text(
+            "Starring: ${movieDetails.cast.take(3).join(', ')}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(color: AppColors.greyColor),
+          ),
+        ),
+        Flexible(
+          flex: 1,
+          child: TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(foregroundColor: AppColors.whiteColor),
+            child: Text("more"),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -190,7 +229,7 @@ class TrailerAndRecommends extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 FutureBuilder(
-                  future: MovieFetcher.getRecommendMovies(movieDetails.id),
+                  future: MovieFetcher.getRecommendMovies(movieDetails.id!),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return GridView.count(
@@ -213,50 +252,50 @@ class TrailerAndRecommends extends StatelessWidget {
                     }
 
                     final List<Movie> movies = snapshot.data!;
-                    return GridView.count(
-                      physics: NeverScrollableScrollPhysics(),
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      crossAxisCount: 3,
-                      childAspectRatio: 1 / 1.5,
+                    return Wrap(
+                      runSpacing: 8,
+                      spacing: 8,
                       children: List.generate(
                         12,
-                        (index) => GestureDetector(
-                          onTap: () async {
-                            final MovieDetails? movieDetails =
-                                await MovieFetcher.getMovieDetails(
-                                  (movies[index].id!),
-                                );
-                            if (movieDetails != null) {
-                              Navigator.push(
-                                context,
-                                CustomNav(
-                                  page: MovieDetailsScreen(
-                                    movieDetails: movieDetails,
-                                  ),
+                        (index) => movies[index].posterPath != null
+                            ? GestureDetector(
+                                onTap: () async {
+                                  final MovieDetails? movieDetails =
+                                      await MovieFetcher.getMovieDetails(
+                                        (movies[index].id!),
+                                      );
+                                  if (movieDetails != null) {
+                                    Navigator.push(
+                                      context,
+                                      CustomNav(
+                                        page: MovieDetailsScreen(
+                                          movieDetails: movieDetails,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: CachedNetworkImage(
+                                  cacheManager: customCacheManager,
+                                  memCacheHeight: 200,
+                                  fit: BoxFit.cover,
+                                  width: size.width * 0.3,
+                                  height: 200,
+                                  imageUrl:
+                                      '${Api.imageBaseUrl}/${movies[index].posterPath}',
                                 ),
-                              );
-                            }
-                          },
-                          child: CachedNetworkImage(
-                            cacheManager: customCacheManager,
-                            memCacheHeight: 200,
-                            fit: BoxFit.cover,
-                            width: size.width * 0.3,
-                            height: 200,
-                            imageUrl:
-                                '${Api.imageBaseUrl}/${movies[index].posterPath}',
-                          ),
-                        ),
+                              )
+                            : SizedBox.shrink(),
                       ),
                     );
                   },
                 ),
-                if (movieDetails.video)
-                  CachedNetworkImage(
-                    imageUrl:
-                        '${Api.imageBaseUrl}/${movieDetails.backdropPath}',
-                  ),
+                movieDetails.video!
+                    ? CachedNetworkImage(
+                        imageUrl:
+                            '${Api.imageBaseUrl}/${movieDetails.backdropPath}',
+                      )
+                    : Text("data"),
               ],
             ),
           ),

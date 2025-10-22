@@ -4,7 +4,10 @@ import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
+import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/moviedetails_screen/movie_details_screen.dart';
 import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/custom_nav.dart';
 
 class HeroCardHome extends StatelessWidget {
   const HeroCardHome({super.key, required this.width});
@@ -16,75 +19,87 @@ class HeroCardHome extends StatelessWidget {
     return FutureBuilder(
       future: MovieFetcher.getMovies(MovieCategory.trendingDay),
       builder: (context, snapshot) {
-        if (!snapshot.hasData || snapshot.hasError) {
+        if (!snapshot.hasData || snapshot.hasError || snapshot.data!.isEmpty) {
           return DefaultItem(width: width);
         }
         final Movie movie = snapshot.data!.first;
-        return Container(
-          width: width * 0.85,
-          height: 500,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: CachedNetworkImageProvider(
-                cacheManager: customCacheManager,
-                '${Api.imageBaseUrl}/${movie.posterPath}',
+        return GestureDetector(
+          onTap: () async {
+            final MovieDetails? movieDetails =
+                await MovieFetcher.getMovieDetails(movie.id!);
+            if (movieDetails != null) {
+              Navigator.push(
+                context,
+                CustomNav(page: MovieDetailsScreen(movieDetails: movieDetails)),
+              );
+            }
+          },
+          child: Container(
+            width: width * 0.85,
+            height: 500,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: CachedNetworkImageProvider(
+                  cacheManager: customCacheManager,
+                  '${Api.imageBaseUrl}/${movie.posterPath!}',
+                ),
               ),
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                movie.title!,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 34,
-                  fontWeight: FontWeight.bold,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  movie.title!,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 34,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Row(
-                children: List.generate(
-                  4,
-                  (index) => Row(
-                    children: [
-                      Text(
-                        "Category${index + 1}",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(width: 5),
-
-                      if (index != 3)
-                        Container(
-                          width: 3,
-                          height: 3,
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(500),
-                          ),
+                Row(
+                  children: List.generate(
+                    4,
+                    (index) => Row(
+                      children: [
+                        Text(
+                          "Category${index + 1}",
+                          style: TextStyle(color: Colors.white),
                         ),
-                      if (index != 3) SizedBox(width: 5),
-                    ],
+                        SizedBox(width: 5),
+
+                        if (index != 3)
+                          Container(
+                            width: 3,
+                            height: 3,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(500),
+                            ),
+                          ),
+                        if (index != 3) SizedBox(width: 5),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  HeroCardActionButton(
-                    icon: Icons.play_arrow,
-                    isDark: false,
-                    label: "Play",
-                  ),
-                  HeroCardActionButton(
-                    icon: Icons.add,
-                    isDark: true,
-                    label: "My List",
-                  ),
-                ],
-              ),
-            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    HeroCardActionButton(
+                      icon: Icons.play_arrow,
+                      isDark: false,
+                      label: "Play",
+                    ),
+                    HeroCardActionButton(
+                      icon: Icons.add,
+                      isDark: true,
+                      label: "My List",
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },

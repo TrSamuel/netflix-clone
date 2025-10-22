@@ -21,7 +21,7 @@ class _LoadingItemState extends State<LoadingItemContainer> {
         begin = begin == Alignment.bottomLeft
             ? Alignment.topRight
             : Alignment.bottomLeft;
-        
+
         end = end == Alignment.topRight
             ? Alignment.bottomLeft
             : Alignment.topRight;

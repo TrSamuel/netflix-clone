@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
-import 'package:netflixclone/features/netflix/data/model/movie/movie_details_model.dart';
+import 'package:netflixclone/features/netflix/data/model/movie/movie_details_model/movie_details_model.dart';
 import 'package:netflixclone/features/netflix/data/model/movie/movie_model/movie_model.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:http/http.dart' as http;
@@ -89,7 +89,9 @@ class MovieApiService {
   Future<MovieDetailsModel?> getMovieDetails(int id) async {
     try {
       final response = await http.get(
-        Uri.parse('${Api.movieBaseUrl}/$id?api_key=${Api.key}'),
+        Uri.parse(
+          '${Api.movieBaseUrl}/$id?api_key=${Api.key}&append_to_response=credits,translations,release_dates',
+        ),
       );
       if (response.statusCode == 200) {
         debugPrint('fetch movie details : successful response');

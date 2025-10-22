@@ -30,6 +30,7 @@ class ItemRowView extends StatelessWidget {
     final future = movieCategory != null
         ? MovieFetcher.getMovies(movieCategory!)
         : TvshowFetcher.getTvShows(tvShowCategory!);
+    late bool imgStatus;
     return SizedBox(
       width: double.infinity,
       child: FutureBuilder(
@@ -58,11 +59,12 @@ class ItemRowView extends StatelessWidget {
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(rowItemList.length, (index) {
-                    final bool imgStatus;
+              SizedBox(
+                height: 150,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: rowItemList.length,
+                  itemBuilder: (context, index) {
                     if (movieCategory != null) {
                       imgStatus =
                           (rowItemList[index] as Movie).posterPath!.isNotEmpty;
@@ -71,47 +73,44 @@ class ItemRowView extends StatelessWidget {
                           (rowItemList[index] as TvShow).posterPath.isNotEmpty;
                     }
                     return imgStatus
-                        ? Row(
-                            children: [
-                              SizedBox(width: 10),
-                              GestureDetector(
-                                onTap: () async {
-                                  if (movieCategory != null) {
-                                    final MovieDetails? movieDetails =
-                                        await MovieFetcher.getMovieDetails(
-                                          (rowItemList[index] as Movie).id!,
-                                        );
-                                    if (movieDetails != null) {
-                                      Navigator.push(
-                                        context,
-                                        CustomNav(
-                                          page: MovieDetailsScreen(
-                                            movieDetails: movieDetails,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                  }
-                                },
-                                child: CachedNetworkImage(
-                                  cacheManager: customCacheManager,
-                                  width: 100,
-                                  height: 150,
-                                  memCacheHeight: 300,
-                                  memCacheWidth: 200,
-                                  imageUrl:
-                                      '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath : (rowItemList[index] as TvShow).posterPath}',
-                                  placeholder: (context, url) =>
-                                      LoadingItemContainer(),
-                                  errorWidget: (context, url, error) =>
-                                      LoadingItemContainer(),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ],
+                        ? GestureDetector(
+                            onTap: () async {
+                              if (movieCategory != null) {
+                                final MovieDetails? movieDetails =
+                                    await MovieFetcher.getMovieDetails(
+                                      (rowItemList[index] as Movie).id!,
+                                    );
+                                if (movieDetails != null) {
+                                  Navigator.push(
+                                    context,
+                                    CustomNav(
+                                      page: MovieDetailsScreen(
+                                        movieDetails: movieDetails,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }
+                            },
+                            child: CachedNetworkImage(
+                              cacheManager: customCacheManager,
+                              width: 100,
+                              height: 150,
+                              memCacheHeight: 300,
+                              memCacheWidth: 200,
+                              imageUrl:
+                                  '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath! : (rowItemList[index] as TvShow).posterPath}',
+                              placeholder: (context, url) =>
+                                  LoadingItemContainer(),
+                              errorWidget: (context, url, error) =>
+                                  LoadingItemContainer(),
+                              fit: BoxFit.cover,
+                            ),
                           )
                         : SizedBox.shrink();
-                  }),
+                  },
+                  separatorBuilder: (context, index) =>
+                      imgStatus ? SizedBox(width: 10) : SizedBox.shrink(),
                 ),
               ),
             ],
