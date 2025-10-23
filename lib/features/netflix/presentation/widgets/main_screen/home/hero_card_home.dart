@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
@@ -22,7 +24,9 @@ class HeroCardHome extends StatelessWidget {
         if (!snapshot.hasData || snapshot.hasError || snapshot.data!.isEmpty) {
           return DefaultItem(width: width);
         }
-        final Movie movie = snapshot.data!.first;
+        final random = Random();
+        final Movie movie =
+            snapshot.data![random.nextInt(snapshot.data!.length)];
         return GestureDetector(
           onTap: () async {
             final MovieDetails? movieDetails =

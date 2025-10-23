@@ -99,18 +99,20 @@ class MovieDetailsModel extends MovieDetails {
   }) : super(
          adult: adult,
          backdropPath: backdropPath,
-         genres: genrs!.map((g) => g.name).toList(),
+         genres: genrs?.map((g) => g.name).toList() ?? [],
          id: id,
          title: title,
          originalTitle: originalTitle,
          overview: overview,
-         releaseDate: DateTime.parse(releasDate!),
+        releaseDate: releasDate != null ? DateTime.tryParse(releasDate) : null,
          tagline: tagline,
-         runTime: runtime! % 60 != 0
-             ? '${runtime ~/ 60}h ${runtime % 60}m'
-             : '${runtime ~/ 60}h',
+        runTime: runtime != null
+        ? (runtime % 60 != 0
+            ? '${runtime ~/ 60}h ${runtime % 60}m'
+            : '${runtime ~/ 60}h')
+        : 'N/A',
          video: false,
-         cast: credits!.cast!.map((c) => c.name).toList(),
+         cast: credits!.cast==null?[]:credits.cast!.map((c) => c.name).toList(),
          director: credits.crew!
              .where((c) => c.department == 'Directing')
              .map((c) => c.name)
@@ -123,6 +125,11 @@ class MovieDetailsModel extends MovieDetails {
          languages: translations!.translations!
              .map((t) => t.englishName)
              .toList(),
+         maturityRating: releaseDates!.results!
+             .where((r) => r.iso31661 == 'IN')
+             .map((r) => r.releaseDates!.last.certification)
+             .join(', ')
+             .replaceAll('()', ''),
        );
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) {

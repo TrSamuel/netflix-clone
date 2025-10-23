@@ -4,7 +4,7 @@ import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
 part 'movie_model.g.dart';
 
 @JsonSerializable()
-class MovieModel extends Movie{
+class MovieModel extends Movie {
   bool? adult;
   @JsonKey(name: 'backdrop_path')
   String? backdropPath;

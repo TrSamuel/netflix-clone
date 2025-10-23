@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
+import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/main_action_button.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/starring.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/trailer_and_recommends.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/user_choice_action_button.dart';
 
-class MovieDetailsScreen extends StatelessWidget {
-  final MovieDetails movieDetails;
-  const MovieDetailsScreen({super.key, required this.movieDetails});
+class TvshowDetailsScreen extends StatelessWidget {
+  final TvshowDetails tvshowDetails;
+  const TvshowDetailsScreen({super.key, required this.tvshowDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +35,12 @@ class MovieDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
-                imageUrl: '${Api.imageBaseUrl}/${movieDetails.backdropPath!}',
+                imageUrl: '${Api.imageBaseUrl}/${tvshowDetails.backdropPath!}',
                 placeholder: (context, url) => Container(
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      movieDetails.originalTitle!,
+                      tvshowDetails.originalName!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -56,7 +54,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      movieDetails.originalTitle!,
+                      tvshowDetails.originalName!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -74,7 +72,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movieDetails.title!,
+                      tvshowDetails.name!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontSize: 28,
@@ -87,29 +85,21 @@ class MovieDetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${movieDetails.releaseDate!.year}',
+                            '${tvshowDetails.releaseDate!.year}',
                             style: TextStyle(color: AppColors.whiteColor),
                           ),
                           Container(
                             color: AppColors.greyColor,
                             padding: EdgeInsets.all(2),
                             child: Text(
-                              movieDetails.maturityRating!.isNotEmpty
-                                  ? movieDetails.maturityRating!
+                              tvshowDetails.maturityRating!.isNotEmpty
+                                  ? tvshowDetails.maturityRating!
                                   : 'U/A 16+',
                               style: TextStyle(color: AppColors.whiteColor),
                             ),
                           ),
-                          Text(
-                            movieDetails.runTime!,
-                            style: TextStyle(color: AppColors.whiteColor),
-                          ),
                         ],
                       ),
-                    ),
-                    Text(
-                      "Watch in ${movieDetails.languages.take(2).join(' and ')}",
-                      style: TextStyle(color: AppColors.whiteColor),
                     ),
                     MainActionButton(
                       width: width,
@@ -126,18 +116,14 @@ class MovieDetailsScreen extends StatelessWidget {
                       fgColor: AppColors.whiteColor,
                     ),
                     Text(
-                      movieDetails.overview!,
+                      tvshowDetails.overview!,
                       style: TextStyle(
                         fontSize: 16,
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Starring(movieDetails: movieDetails),
-                    Text(
-                      "Director: ${movieDetails.director!}",
-                      style: TextStyle(color: AppColors.greyColor),
-                    ),
+                    // Starring(tvshowDetails: tvshowDetails),
                     Row(
                       children: [
                         UserChoiceActionButton(
@@ -154,7 +140,7 @@ class MovieDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    TrailerAndRecommends(movieDetails: movieDetails),
+                    // TrailerAndRecommends(tvshowDetails: tvshowDetails),
                   ],
                 ),
               ),

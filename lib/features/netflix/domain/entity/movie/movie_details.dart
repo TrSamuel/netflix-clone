@@ -14,6 +14,7 @@ class MovieDetails {
   final List<String?> writers;
   final String? director;
   final List<String?> languages;
+  final String? maturityRating;
 
   MovieDetails({
     required this.adult,
@@ -31,5 +32,6 @@ class MovieDetails {
     required this.writers,
     required this.director,
     required this.languages,
+    required this.maturityRating,
   });
 }

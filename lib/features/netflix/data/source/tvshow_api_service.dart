@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
-import 'package:netflixclone/features/netflix/data/model/tv_show/tv_show_model.dart';
+import 'package:netflixclone/features/netflix/data/model/tv_show/tv_show_details_model/tv_show_details_model.dart';
+import 'package:netflixclone/features/netflix/data/model/tv_show/tv_show_model/tv_show_model.dart';
 
 class TvshowApiService {
   TvshowApiService.internal();
@@ -74,6 +75,36 @@ class TvshowApiService {
     } catch (e) {
       debugPrint('Failed to fetch ${category.name} tvshows: $e');
       return [];
+    }
+  }
+
+
+  Future<TvShowDetailsModel?>  getTvShowDetails(int id) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          '${Api.tvBaseUrl}/$id?api_key=${Api.key}&append_to_response=credits,content_ratings',
+        ),
+      );
+      if (response.statusCode == 200) {
+        debugPrint('fetch tvshow details : successful response');
+
+        final json = jsonDecode(response.body);
+
+        return TvShowDetailsModel.fromJson(json);
+      }
+      if (response.statusCode == 401) {
+        debugPrint(' Cannot fetch tvshow details because of invalid api key');
+      }
+      if (response.statusCode == 503) {
+        debugPrint(
+          'tvshow details: This service is temporarily offline, try again later.',
+        );
+      }
+      return null;
+    } catch (e) {
+      debugPrint('Failed to fetch tvshow details: $e');
+      return null;
     }
   }
 }

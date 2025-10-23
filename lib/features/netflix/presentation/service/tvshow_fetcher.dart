@@ -1,10 +1,16 @@
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/data/repository/tvshow_rep_imp.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
+import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
+import 'package:netflixclone/features/netflix/domain/usecase/get_tvshowdetails.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/get_tvshows.dart';
 
 class TvshowFetcher {
   static final GetTvshows getTvShowUseCase = GetTvshows(
+    tvshowRepo: TvshowRepImp.instance,
+  );
+
+  static final GetTvshowdetails _getTvshowdetails = GetTvshowdetails(
     tvshowRepo: TvshowRepImp.instance,
   );
 
@@ -24,4 +30,7 @@ class TvshowFetcher {
         return await getTvShowUseCase(TvShowCategory.onTheAir);
     }
   }
+
+  static Future<TvshowDetails?> getTvShowDetails(int id) async =>
+      await _getTvshowdetails(id);
 }

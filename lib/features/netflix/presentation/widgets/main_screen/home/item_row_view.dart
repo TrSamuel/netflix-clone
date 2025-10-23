@@ -6,7 +6,9 @@ import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
+import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/moviedetails_screen/movie_details_screen.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/tvshowdetails_screen/tvshow_details_screen.dart';
 import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/presentation/service/tvshow_fetcher.dart';
@@ -70,7 +72,7 @@ class ItemRowView extends StatelessWidget {
                           (rowItemList[index] as Movie).posterPath!.isNotEmpty;
                     } else {
                       imgStatus =
-                          (rowItemList[index] as TvShow).posterPath.isNotEmpty;
+                          (rowItemList[index] as TvShow).posterPath!.isNotEmpty;
                     }
                     return imgStatus
                         ? GestureDetector(
@@ -86,6 +88,21 @@ class ItemRowView extends StatelessWidget {
                                     CustomNav(
                                       page: MovieDetailsScreen(
                                         movieDetails: movieDetails,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              } else {
+                                final TvshowDetails? tvshowDetails =
+                                    await TvshowFetcher.getTvShowDetails(
+                                      (rowItemList[index] as TvShow).id!,
+                                    );
+                                if (tvshowDetails != null) {
+                                  Navigator.push(
+                                    context,
+                                    CustomNav(
+                                      page: TvshowDetailsScreen(
+                                        tvshowDetails: tvshowDetails,
                                       ),
                                     ),
                                   );
