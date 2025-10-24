@@ -6,4 +6,6 @@ abstract class TvshowRepo {
   Future<List<TvShow>> getTvShows(TvShowCategory category);
 
   Future<TvshowDetails?> getTvShowDetails(int id);
+
+  Future<List<TvShow>> getrecommendTvShows(int id);
 }

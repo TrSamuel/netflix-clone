@@ -107,4 +107,38 @@ class TvshowApiService {
       return null;
     }
   }
+
+
+  Future<List<TvShowModel>> getRecommTvShows(int id) async {
+    try {
+      final String url =
+          '${Api.tvBaseUrl}/$id/recommendations?api_key=${Api.key}';
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        debugPrint('recommend tvshows : successful response');
+
+        final json = jsonDecode(response.body);
+
+        final results = json['results'] as List;
+
+        return results.map((json) => TvShowModel.fromJson(json)).toList();
+      }
+      if (response.statusCode == 401) {
+        debugPrint(
+          ' Cannot fetch recommend tvshows because of invalid api key',
+        );
+      }
+      if (response.statusCode == 503) {
+        debugPrint(
+          'recommend tvshows: This service is temporarily offline, try again later.',
+        );
+      }
+
+      return [];
+    } catch (e) {
+      debugPrint('Failed to fetch recommend tvshows: $e');
+      return [];
+    }
+  }
 }

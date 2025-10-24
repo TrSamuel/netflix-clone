@@ -7,6 +7,7 @@ import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_detai
 import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/main_action_button.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/user_choice_action_button.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/tvshowdetails_screen/episodes_recommends.dart';
 
 class TvshowDetailsScreen extends StatelessWidget {
   final TvshowDetails tvshowDetails;
@@ -140,7 +141,7 @@ class TvshowDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // TrailerAndRecommends(tvshowDetails: tvshowDetails),
+                    EpisodesRecommends(tvshowDetails: tvshowDetails),
                   ],
                 ),
               ),

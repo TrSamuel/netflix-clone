@@ -15,11 +15,13 @@ class TvshowRepImp extends TvshowRepo {
 
   @override
   Future<List<TvShow>> getTvShows(TvShowCategory category) async =>
-   await tvSource.getTvShows(category);
-  
+      await tvSource.getTvShows(category);
 
   @override
   Future<TvshowDetails?> getTvShowDetails(int id) async =>
-     await tvSource.getTvShowDetails(id);
-  
+      await tvSource.getTvShowDetails(id);
+
+  @override
+  Future<List<TvShow>> getrecommendTvShows(int id) async =>
+      await tvSource.getRecommTvShows(id);
 }

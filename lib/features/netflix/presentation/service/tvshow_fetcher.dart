@@ -2,6 +2,7 @@ import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/data/repository/tvshow_rep_imp.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
+import 'package:netflixclone/features/netflix/domain/usecase/get_recommendTvShows.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/get_tvshowdetails.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/get_tvshows.dart';
 
@@ -12,6 +13,10 @@ class TvshowFetcher {
 
   static final GetTvshowdetails _getTvshowdetails = GetTvshowdetails(
     tvshowRepo: TvshowRepImp.instance,
+  );
+
+  static final GetRecommendtvshows _getRecommendtvshows = GetRecommendtvshows(
+    tvshowRep: TvshowRepImp.instance,
   );
 
   static Future<List<TvShow>> getTvShows(TvShowCategory category) async {
@@ -33,4 +38,7 @@ class TvshowFetcher {
 
   static Future<TvshowDetails?> getTvShowDetails(int id) async =>
       await _getTvshowdetails(id);
+
+  static Future<List<TvShow>> getRecommTvShows(int id) async =>
+      await _getRecommendtvshows(id);
 }
