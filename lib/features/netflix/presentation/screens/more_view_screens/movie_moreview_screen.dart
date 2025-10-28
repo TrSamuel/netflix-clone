@@ -15,7 +15,7 @@ class MovieMoreviewScreen extends StatelessWidget {
           leading: SizedBox.shrink(),
           backgroundColor: AppColors.greyColor,
           title: Text(
-            movieDetails.title!,
+            movieDetails.title_!,
             style: TextStyle(color: AppColors.whiteColor),
           ),
           titleTextStyle: TextStyle(
@@ -38,19 +38,19 @@ class MovieMoreviewScreen extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            if (movieDetails.cast.isNotEmpty)
-              MoreField(title: 'Cast', names: movieDetails.cast, isCast: true),
-            if (movieDetails.director!.isNotEmpty)
-              MoreField(title: 'Director', names: [movieDetails.director]),
-            if (movieDetails.writers.isNotEmpty)
-              MoreField(title: 'Writers', names: movieDetails.writers),
+            if (movieDetails.cast_.isNotEmpty)
+              MoreField(title: 'Cast', names: movieDetails.cast_, isCast: true),
+            if (movieDetails.director_!.isNotEmpty)
+              MoreField(title: 'Director', names: [movieDetails.director_]),
+            if (movieDetails.writers_.isNotEmpty)
+              MoreField(title: 'Writers', names: movieDetails.writers_),
 
-            if (movieDetails.maturityRating!.isNotEmpty)
-              MaturityRating(maturityRating: movieDetails.maturityRating),
-            if (movieDetails.genres.isNotEmpty)
-              MoreField(title: 'Genres', names: movieDetails.genres),
-            if (movieDetails.tagline!.isNotEmpty)
-              MoreField(title: 'This movie is', names: [movieDetails.tagline]),
+            if (movieDetails.maturityRating_!.isNotEmpty)
+              MaturityRating(maturityRating: movieDetails.maturityRating_),
+            if (movieDetails.genres_.isNotEmpty)
+              MoreField(title: 'Genres', names: movieDetails.genres_),
+            if (movieDetails.tagline_!.isNotEmpty)
+              MoreField(title: 'This movie is', names: [movieDetails.tagline_]),
           ],
         ),
       ),

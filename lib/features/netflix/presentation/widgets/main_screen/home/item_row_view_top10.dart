@@ -8,6 +8,7 @@ import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
+import 'package:netflixclone/features/netflix/presentation/provider/tvseason_selector.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/moviedetails_screen/movie_details_screen.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/tvshowdetails_screen/tvshow_details_screen.dart';
 import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher.dart';
@@ -15,6 +16,7 @@ import 'package:netflixclone/features/netflix/presentation/service/tvshow_fetche
 import 'package:netflixclone/features/netflix/presentation/widgets/custom_nav.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/dummy_items_home.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/loading_item_container.dart';
+import 'package:provider/provider.dart';
 
 class ItemRowViewTop10 extends StatelessWidget {
   final MovieCategory? movieCategory;
@@ -61,7 +63,7 @@ class ItemRowViewTop10 extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: 150,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
@@ -69,10 +71,10 @@ class ItemRowViewTop10 extends StatelessWidget {
                   itemBuilder: (context, index) {
                     if (movieCategory != null) {
                       imgStatus =
-                          (rowItemList[index] as Movie).posterPath!.isNotEmpty;
+                          (rowItemList[index] as Movie).posterPath_!.isNotEmpty;
                     } else {
                       imgStatus =
-                          (rowItemList[index] as TvShow).posterPath!.isNotEmpty;
+                          (rowItemList[index] as TvShow).posterPath_!.isNotEmpty;
                     }
                     return imgStatus
                         ? Stack(
@@ -93,7 +95,7 @@ class ItemRowViewTop10 extends StatelessWidget {
                                     if (movieCategory != null) {
                                       final MovieDetails? movieDetails =
                                           await MovieFetcher.getMovieDetails(
-                                            (rowItemList[index] as Movie).id!,
+                                            (rowItemList[index] as Movie).id_!,
                                           );
                                       if (movieDetails != null) {
                                         Navigator.push(
@@ -105,17 +107,21 @@ class ItemRowViewTop10 extends StatelessWidget {
                                           ),
                                         );
                                       }
-                                    }else{
-                                       final TvshowDetails? tvshowDetails =
+                                    } else {
+                                      final TvshowDetails? tvshowDetails =
                                           await TvshowFetcher.getTvShowDetails(
-                                            (rowItemList[index] as TvShow).id!,
+                                            (rowItemList[index] as TvShow).id_!,
                                           );
                                       if (tvshowDetails != null) {
+                                        Provider.of<TvseasonSelector>(
+                                          context,
+                                          listen: false,
+                                        ).changeSeason(1);
                                         Navigator.push(
                                           context,
                                           CustomNav(
                                             page: TvshowDetailsScreen(
-                                            tvshowDetails: tvshowDetails,
+                                              tvshowDetails: tvshowDetails,
                                             ),
                                           ),
                                         );
@@ -129,7 +135,7 @@ class ItemRowViewTop10 extends StatelessWidget {
                                     memCacheHeight: 300,
                                     memCacheWidth: 200,
                                     imageUrl:
-                                        '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath! : (rowItemList[index] as TvShow).posterPath}',
+                                        '${Api.imageBaseUrl}/${movieCategory != null ? (rowItemList[index] as Movie).posterPath_! : (rowItemList[index] as TvShow).posterPath_}',
                                     placeholder: (context, url) =>
                                         LoadingItemContainer(),
                                     errorWidget: (context, url, error) =>

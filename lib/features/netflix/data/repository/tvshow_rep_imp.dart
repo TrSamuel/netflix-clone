@@ -1,5 +1,6 @@
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/data/source/tvshow_api_service.dart';
+import 'package:netflixclone/features/netflix/domain/entity/tv_show/episode.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
 import 'package:netflixclone/features/netflix/domain/repository/tvshow_repo.dart';
@@ -24,4 +25,8 @@ class TvshowRepImp extends TvshowRepo {
   @override
   Future<List<TvShow>> getrecommendTvShows(int id) async =>
       await tvSource.getRecommTvShows(id);
+
+  @override
+  Future<List<Episode>> getEpisodes(int seriesId, int seasonId) async =>
+      await tvSource.getEpisodes(seriesId, seasonId);
 }

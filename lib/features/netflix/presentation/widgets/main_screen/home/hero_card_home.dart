@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
@@ -24,13 +22,11 @@ class HeroCardHome extends StatelessWidget {
         if (!snapshot.hasData || snapshot.hasError || snapshot.data!.isEmpty) {
           return DefaultItem(width: width);
         }
-        final random = Random();
-        final Movie movie =
-            snapshot.data![random.nextInt(snapshot.data!.length)];
+        final Movie movie = snapshot.data!.first;
         return GestureDetector(
           onTap: () async {
             final MovieDetails? movieDetails =
-                await MovieFetcher.getMovieDetails(movie.id!);
+                await MovieFetcher.getMovieDetails(movie.id_!);
             if (movieDetails != null) {
               Navigator.push(
                 context,
@@ -47,7 +43,7 @@ class HeroCardHome extends StatelessWidget {
                 fit: BoxFit.cover,
                 image: CachedNetworkImageProvider(
                   cacheManager: customCacheManager,
-                  '${Api.imageBaseUrl}/${movie.posterPath!}',
+                  '${Api.imageBaseUrl}/${movie.posterPath_!}',
                 ),
               ),
             ),
@@ -55,7 +51,7 @@ class HeroCardHome extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  movie.title!,
+                  movie.title_!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 34,

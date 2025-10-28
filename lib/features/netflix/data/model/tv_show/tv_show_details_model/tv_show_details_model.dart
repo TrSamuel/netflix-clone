@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/episode.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
 
 import 'content_ratings.dart';
@@ -108,28 +107,16 @@ class TvShowDetailsModel extends TvshowDetails {
     this.credits,
     this.contentRatings,
   }) : super(
-         id: id,
-         backdropPath: backdropPath,
-         releaseDate: DateTime.parse(firstAirDate!),
-         maturityRating: contentRatings!.results!.first.rating,
-         noOfSeasons: numberOfSeasons,
-         name: name,
+         id_: id,
+         backdropPath_: backdropPath,
+         releaseDate_: DateTime.parse(firstAirDate!),
+         maturityRating_: contentRatings!.results!.first.rating,
+         noOfSeasons_: numberOfSeasons,
+         name_: name,
          genres_: genres!.map((g) => g.name).toList(),
-         originalName: originalName,
-         overview: overview,
-         casts: credits!.cast!.map((c) => c.name).toList(),
-         episodes: seasons!
-             .map(
-               (s) => Episode(
-                 id: s.id,
-                 name: s.name,
-                 overview: s.overview,
-                 posterPath: s.posterPath,
-                 seasonNumber: s.seasonNumber,
-                 episodeCount: s.episodeCount,
-               ),
-             )
-             .toList(),
+         originalName_: originalName,
+         overview_: overview,
+         casts_: credits!.cast!.map((c) => c.name).toList(),
        );
 
   factory TvShowDetailsModel.fromJson(Map<String, dynamic> json) {

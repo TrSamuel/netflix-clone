@@ -37,12 +37,12 @@ class MovieDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
-                imageUrl: '${Api.imageBaseUrl}/${movieDetails.backdropPath!}',
+                imageUrl: '${Api.imageBaseUrl}/${movieDetails.backdropPath_!}',
                 placeholder: (context, url) => Container(
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      movieDetails.originalTitle!,
+                      movieDetails.originalTitle_!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -56,7 +56,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      movieDetails.originalTitle!,
+                      movieDetails.originalTitle_!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movieDetails.title!,
+                      movieDetails.title_!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontSize: 28,
@@ -87,28 +87,28 @@ class MovieDetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${movieDetails.releaseDate!.year}',
+                            '${movieDetails.releaseDate_!.year}',
                             style: TextStyle(color: AppColors.whiteColor),
                           ),
                           Container(
                             color: AppColors.greyColor,
                             padding: EdgeInsets.all(2),
                             child: Text(
-                              movieDetails.maturityRating!.isNotEmpty
-                                  ? movieDetails.maturityRating!
+                              movieDetails.maturityRating_!.isNotEmpty
+                                  ? movieDetails.maturityRating_!
                                   : 'U/A 16+',
                               style: TextStyle(color: AppColors.whiteColor),
                             ),
                           ),
                           Text(
-                            movieDetails.runTime!,
+                            movieDetails.runTime_!,
                             style: TextStyle(color: AppColors.whiteColor),
                           ),
                         ],
                       ),
                     ),
                     Text(
-                      "Watch in ${movieDetails.languages.take(2).join(' and ')}",
+                      "Watch in ${movieDetails.languages_.take(2).join(' and ')}",
                       style: TextStyle(color: AppColors.whiteColor),
                     ),
                     MainActionButton(
@@ -126,7 +126,7 @@ class MovieDetailsScreen extends StatelessWidget {
                       fgColor: AppColors.whiteColor,
                     ),
                     Text(
-                      movieDetails.overview!,
+                      movieDetails.overview_!,
                       style: TextStyle(
                         fontSize: 16,
                         color: AppColors.whiteColor,
@@ -135,7 +135,7 @@ class MovieDetailsScreen extends StatelessWidget {
                     ),
                     Starring(movieDetails: movieDetails),
                     Text(
-                      "Director: ${movieDetails.director!}",
+                      "Director: ${movieDetails.director_!}",
                       style: TextStyle(color: AppColors.greyColor),
                     ),
                     Row(

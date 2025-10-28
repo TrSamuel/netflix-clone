@@ -1,29 +1,27 @@
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/episode.dart';
+
 
 class TvshowDetails {
-  final int? id;
-  final String? backdropPath;
-  final DateTime? releaseDate;
-  final String? maturityRating;
-  final int? noOfSeasons;
-  final String? name;
-  final List<String?> casts;
+  final int? id_;
+  final String? backdropPath_;
+  final DateTime? releaseDate_;
+  final String? maturityRating_;
+  final int? noOfSeasons_;
+  final String? name_;
+  final List<String?> casts_;
   final List<String?> genres_;
-  final String? originalName;
-  final String? overview;
-  final List<Episode?> episodes;
+  final String? originalName_;
+  final String? overview_;
 
   TvshowDetails({
-    required this.id,
-    required this.backdropPath,
-    required this.releaseDate,
-    required this.maturityRating,
-    required this.noOfSeasons,
-    required this.name,
+    required this.id_,
+    required this.backdropPath_,
+    required this.releaseDate_,
+    required this.maturityRating_,
+    required this.noOfSeasons_,
+    required this.name_,
     required this.genres_,
-    required this.originalName,
-    required this.overview,
-    required this.casts,
-    required this.episodes,
+    required this.originalName_,
+    required this.overview_,
+    required this.casts_,
   });
 }

@@ -14,9 +14,7 @@ part 'movie_details_model.g.dart';
 
 @JsonSerializable()
 class MovieDetailsModel extends MovieDetails {
-  @override
   bool? adult;
-  @override
   @JsonKey(name: 'backdrop_path')
   String? backdropPath;
   @JsonKey(name: 'belongs_to_collection')
@@ -24,7 +22,6 @@ class MovieDetailsModel extends MovieDetails {
   int? budget;
   List<Genre>? genrs;
   String? homepage;
-  @override
   int? id;
   @JsonKey(name: 'imdb_id')
   String? imdbId;
@@ -32,10 +29,8 @@ class MovieDetailsModel extends MovieDetails {
   List<String>? originCountry;
   @JsonKey(name: 'original_language')
   String? originalLanguage;
-  @override
   @JsonKey(name: 'original_title')
   String? originalTitle;
-  @override
   String? overview;
   double? popularity;
   @JsonKey(name: 'poster_path')
@@ -51,11 +46,8 @@ class MovieDetailsModel extends MovieDetails {
   @JsonKey(name: 'spoken_languages')
   List<SpokenLanguage>? spokenLanguages;
   String? status;
-  @override
   String? tagline;
-  @override
   String? title;
-  @override
   bool? video;
   @JsonKey(name: 'vote_average')
   double? voteAverage;
@@ -97,35 +89,36 @@ class MovieDetailsModel extends MovieDetails {
     this.translations,
     this.releaseDates,
   }) : super(
-         adult: adult,
-         backdropPath: backdropPath,
-         genres: genrs?.map((g) => g.name).toList() ?? [],
-         id: id,
-         title: title,
-         originalTitle: originalTitle,
-         overview: overview,
-        releaseDate: releasDate != null ? DateTime.tryParse(releasDate) : null,
-         tagline: tagline,
-        runTime: runtime != null
-        ? (runtime % 60 != 0
-            ? '${runtime ~/ 60}h ${runtime % 60}m'
-            : '${runtime ~/ 60}h')
-        : 'N/A',
-         video: false,
-         cast: credits!.cast==null?[]:credits.cast!.map((c) => c.name).toList(),
-         director: credits.crew!
+         backdropPath_: backdropPath,
+         genres_: genrs?.map((g) => g.name).toList() ?? [],
+         id_: id,
+         title_: title,
+         originalTitle_: originalTitle,
+         overview_: overview,
+         releaseDate_: releasDate != null ? DateTime.tryParse(releasDate) : null,
+         tagline_: tagline,
+         runTime_: runtime != null
+             ? (runtime % 60 != 0
+                   ? '${runtime ~/ 60}h ${runtime % 60}m'
+                   : '${runtime ~/ 60}h')
+             : 'N/A',
+         video_: false,
+         cast_: credits!.cast == null
+             ? []
+             : credits.cast!.map((c) => c.name).toList(),
+         director_: credits.crew!
              .where((c) => c.department == 'Directing')
              .map((c) => c.name)
              .toList()
              .first,
-         writers: credits.crew!
+         writers_: credits.crew!
              .where((c) => c.department == 'Writing')
              .map((c) => c.name)
              .toList(),
-         languages: translations!.translations!
+         languages_: translations!.translations!
              .map((t) => t.englishName)
              .toList(),
-         maturityRating: releaseDates!.results!
+         maturityRating_: releaseDates!.results!
              .where((r) => r.iso31661 == 'IN')
              .map((r) => r.releaseDates!.last.certification)
              .join(', ')

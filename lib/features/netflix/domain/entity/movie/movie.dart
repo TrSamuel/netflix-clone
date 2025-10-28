@@ -1,7 +1,7 @@
 class Movie {
-  final int? id;
-  final String? posterPath;
-  final String? title;
+  final int? id_;
+  final String? posterPath_;
+  final String? title_;
 
-  Movie({required this.id, required this.posterPath, required this.title});
+  Movie({required this.id_, required this.posterPath_, required this.title_});
 }

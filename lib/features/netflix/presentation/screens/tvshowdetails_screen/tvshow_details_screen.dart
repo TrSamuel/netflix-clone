@@ -36,12 +36,12 @@ class TvshowDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
-                imageUrl: '${Api.imageBaseUrl}/${tvshowDetails.backdropPath!}',
+                imageUrl: '${Api.imageBaseUrl}/${tvshowDetails.backdropPath_!}',
                 placeholder: (context, url) => Container(
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      tvshowDetails.originalName!,
+                      tvshowDetails.originalName_!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class TvshowDetailsScreen extends StatelessWidget {
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      tvshowDetails.originalName!,
+                      tvshowDetails.originalName_!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -73,7 +73,7 @@ class TvshowDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      tvshowDetails.name!,
+                      tvshowDetails.name_!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontSize: 28,
@@ -86,15 +86,15 @@ class TvshowDetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${tvshowDetails.releaseDate!.year}',
+                            '${tvshowDetails.releaseDate_!.year}',
                             style: TextStyle(color: AppColors.whiteColor),
                           ),
                           Container(
                             color: AppColors.greyColor,
                             padding: EdgeInsets.all(2),
                             child: Text(
-                              tvshowDetails.maturityRating!.isNotEmpty
-                                  ? tvshowDetails.maturityRating!
+                              tvshowDetails.maturityRating_!.isNotEmpty
+                                  ? tvshowDetails.maturityRating_!
                                   : 'U/A 16+',
                               style: TextStyle(color: AppColors.whiteColor),
                             ),
@@ -117,7 +117,7 @@ class TvshowDetailsScreen extends StatelessWidget {
                       fgColor: AppColors.whiteColor,
                     ),
                     Text(
-                      tvshowDetails.overview!,
+                      tvshowDetails.overview_!,
                       style: TextStyle(
                         fontSize: 16,
                         color: AppColors.whiteColor,

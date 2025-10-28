@@ -25,7 +25,7 @@ class _TrailerAndRecommendsState extends State<TrailerAndRecommends>
   @override
   void initState() {
     super.initState();
-    future = MovieFetcher.getRecommendMovies(widget.movieDetails.id!);
+    future = MovieFetcher.getRecommendMovies(widget.movieDetails.id_!);
   }
 
   @override
@@ -85,12 +85,13 @@ class _TrailerAndRecommendsState extends State<TrailerAndRecommends>
                       spacing: 8,
                       children: List.generate(
                         12,
-                        (index) => movies[index].posterPath != null
+                        (index) => movies[index].posterPath_ != null
+
                             ? GestureDetector(
                                 onTap: () async {
                                   final MovieDetails? movieDetails =
                                       await MovieFetcher.getMovieDetails(
-                                        (movies[index].id!),
+                                        (movies[index].id_!),
                                       );
                                   if (movieDetails != null) {
                                     Navigator.push(
@@ -110,7 +111,7 @@ class _TrailerAndRecommendsState extends State<TrailerAndRecommends>
                                   width: size.width * 0.3,
                                   height: 200,
                                   imageUrl:
-                                      '${Api.imageBaseUrl}/${movies[index].posterPath}',
+                                      '${Api.imageBaseUrl}/${movies[index].posterPath_}',
                                 ),
                               )
                             : SizedBox.shrink(),
@@ -118,10 +119,10 @@ class _TrailerAndRecommendsState extends State<TrailerAndRecommends>
                     );
                   },
                 ),
-                widget.movieDetails.video!
+                widget.movieDetails.video_!
                     ? CachedNetworkImage(
                         imageUrl:
-                            '${Api.imageBaseUrl}/${widget.movieDetails.backdropPath}',
+                            '${Api.imageBaseUrl}/${widget.movieDetails.backdropPath_}',
                       )
                     : Text("data"),
               ],

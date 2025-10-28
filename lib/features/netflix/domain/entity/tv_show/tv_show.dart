@@ -1,6 +1,6 @@
 class TvShow {
-  final int? id;
-  final String? posterPath;
+  final int? id_;
+  final String? posterPath_;
 
-  TvShow({required this.id, required this.posterPath});
+  TvShow({required this.id_, required this.posterPath_});
 }

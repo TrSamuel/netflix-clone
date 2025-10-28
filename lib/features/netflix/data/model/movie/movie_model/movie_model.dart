@@ -43,7 +43,7 @@ class MovieModel extends Movie {
     this.video,
     this.voteAverage,
     this.voteCount,
-  }) : super(id: id, posterPath: posterPath, title: title);
+  }) : super(id_: id, posterPath_: posterPath, title_: title);
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return _$MovieModelFromJson(json);

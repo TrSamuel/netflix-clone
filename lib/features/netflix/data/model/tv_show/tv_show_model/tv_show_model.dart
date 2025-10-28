@@ -47,7 +47,7 @@ class TvShowModel extends TvShow {
     this.voteAverage,
     this.voteCount,
     this.originCountry,
-  }) : super(id: id, posterPath: posterPath);
+  }) : super(id_: id, posterPath_: posterPath);
 
   factory TvShowModel.fromJson(Map<String, dynamic> json) {
     return _$TvShowModelFromJson(json);

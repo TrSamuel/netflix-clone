@@ -18,8 +18,8 @@ class NetflixApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => BottomnavProvider()),
-         ChangeNotifierProvider(create: (context) => TabbarViewProvider()),
-            ChangeNotifierProvider(create: (context) => TvseasonSelector()),
+        ChangeNotifierProvider(create: (context) => TabbarViewProvider()),
+        ChangeNotifierProvider(create: (context) => TvseasonSelector()),
       ],
       child: MaterialApp(
         theme: AppTheme.themeData,

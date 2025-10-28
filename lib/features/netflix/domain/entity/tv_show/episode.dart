@@ -1,17 +1,14 @@
 class Episode {
-  final int? id;
-  final String? name;
-  final String? overview;
-  final String? posterPath;
-  final int? episodeCount;
-  final int? seasonNumber;
+  final int? id_;
+  final String? name_;
+  final String? overview_;
+  final String? stillPath_;
 
   Episode({
-    required this.id,
-    required this.name,
-    required this.overview,
-    required this.posterPath,
-    required this.seasonNumber,
-    required this.episodeCount,
+    required this.id_,
+    required this.name_,
+    required this.overview_,
+    required this.stillPath_,
+
   });
 }

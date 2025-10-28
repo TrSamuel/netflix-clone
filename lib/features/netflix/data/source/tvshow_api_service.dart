@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
+import 'package:netflixclone/features/netflix/data/model/tv_show/tv_episode_model/tv_episode_model.dart';
 import 'package:netflixclone/features/netflix/data/model/tv_show/tv_show_details_model/tv_show_details_model.dart';
 import 'package:netflixclone/features/netflix/data/model/tv_show/tv_show_model/tv_show_model.dart';
+import 'package:netflixclone/features/netflix/domain/entity/tv_show/episode.dart';
 
 class TvshowApiService {
   TvshowApiService.internal();
@@ -78,8 +80,7 @@ class TvshowApiService {
     }
   }
 
-
-  Future<TvShowDetailsModel?>  getTvShowDetails(int id) async {
+  Future<TvShowDetailsModel?> getTvShowDetails(int id) async {
     try {
       final response = await http.get(
         Uri.parse(
@@ -108,6 +109,38 @@ class TvshowApiService {
     }
   }
 
+  Future<List<Episode>> getEpisodes(int seriesId, int seasonId) async {
+    try {
+      final String url =
+          '${Api.tvBaseUrl}/$seriesId/season/$seasonId?api_key=${Api.key}';
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        debugPrint('Season $seasonId - Episodes : successful response');
+
+        final json = jsonDecode(response.body);
+
+        final results = json["episodes"] as List;
+
+        return results.map((json) => TvEpisodeModel.fromJson(json)).toList();
+      }
+      if (response.statusCode == 401) {
+        debugPrint(
+          'Cannot fetch Season $seasonId - Episodes : because of invalid api key',
+        );
+      }
+      if (response.statusCode == 503) {
+        debugPrint(
+          'Season $seasonId - Episodes: This service is temporarily offline, try again later.',
+        );
+      }
+
+      return [];
+    } catch (e) {
+      debugPrint('Failed to fetch Season $seasonId - Episodes: $e');
+      return [];
+    }
+  }
 
   Future<List<TvShowModel>> getRecommTvShows(int id) async {
     try {

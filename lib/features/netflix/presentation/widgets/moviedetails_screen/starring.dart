@@ -15,7 +15,7 @@ class Starring extends StatelessWidget {
         Flexible(
           flex: 3,
           child: Text(
-            "Starring: ${movieDetails.cast.take(3).join(', ')}",
+            "Starring: ${movieDetails.cast_.take(3).join(', ')}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(color: AppColors.greyColor),
