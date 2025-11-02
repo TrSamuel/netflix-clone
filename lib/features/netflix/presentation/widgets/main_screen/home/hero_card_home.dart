@@ -50,14 +50,6 @@ class HeroCardHome extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  movie.title_!,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 34,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 Row(
                   children: List.generate(
                     4,
@@ -130,14 +122,6 @@ class DefaultItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(
-            "Movie Title",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 34,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           Row(
             children: List.generate(
               4,

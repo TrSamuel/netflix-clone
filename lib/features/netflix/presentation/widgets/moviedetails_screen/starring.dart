@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
-import 'package:netflixclone/features/netflix/presentation/screens/more_view_screens/movie_moreview_screen.dart';
+import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/more_view_screen/movie_moreview_screen.dart';
 
 class Starring extends StatelessWidget {
-  const Starring({super.key, required this.movieDetails});
+  const Starring({super.key, this.movieDetails, this.tvshowDetails});
 
-  final MovieDetails movieDetails;
+  final MovieDetails? movieDetails;
+  final TvshowDetails? tvshowDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class Starring extends StatelessWidget {
         Flexible(
           flex: 3,
           child: Text(
-            "Starring: ${movieDetails.cast_.take(3).join(', ')}",
+            "Starring: ${movieDetails != null ? movieDetails!.cast_.take(3).join(', ') : tvshowDetails!.casts_.take(3).join(', ')}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(color: AppColors.greyColor),
@@ -25,13 +27,23 @@ class Starring extends StatelessWidget {
           flex: 1,
           child: TextButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      MovieMoreviewScreen(movieDetails: movieDetails),
-                ),
-              );
+              if (movieDetails != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        MoreviewScreen(movieDetails: movieDetails!),
+                  ),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        MoreviewScreen(tvshowDetails: tvshowDetails!),
+                  ),
+                );
+              }
             },
             style: TextButton.styleFrom(foregroundColor: AppColors.whiteColor),
             child: Text("more"),

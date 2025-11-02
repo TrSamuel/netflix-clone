@@ -13,7 +13,7 @@ class UserChoiceActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 20, left: 45, top: 25),
+      padding: const EdgeInsets.only(right: 20, left: 25, top: 25),
       child: GestureDetector(
         onTap: () {},
         child: Row(

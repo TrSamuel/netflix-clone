@@ -116,6 +116,7 @@ class TvShowDetailsModel extends TvshowDetails {
          genres_: genres!.map((g) => g.name).toList(),
          originalName_: originalName,
          overview_: overview,
+         creator_: createdBy?.first.name,
          casts_: credits!.cast!.map((c) => c.name).toList(),
        );
 

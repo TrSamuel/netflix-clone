@@ -4,7 +4,7 @@ import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.
 import 'package:netflixclone/features/netflix/domain/usecase/get_moviedetails.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/get_movies.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
-import 'package:netflixclone/features/netflix/domain/usecase/get_recommendmovies.dart';
+import 'package:netflixclone/features/netflix/domain/usecase/get_recommmovies.dart';
 
 class MovieFetcher {
   static final GetMovies getmovieUsecase = GetMovies(

@@ -161,7 +161,7 @@ class MovieDetailsScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavBarWidget(isPreviewScreen: true),
+        bottomNavigationBar: BottomNavBarWidget(),
       ),
     );
   }

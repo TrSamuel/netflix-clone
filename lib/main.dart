@@ -6,7 +6,7 @@ import 'package:netflixclone/features/netflix/presentation/provider/tvseason_sel
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/main_screen.dart';
 import 'package:provider/provider.dart';
 
-Future<void> main() async {
+main() {
   runApp(NetflixApp());
 }
 

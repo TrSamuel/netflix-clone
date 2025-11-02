@@ -19,7 +19,7 @@ class MainScreen extends StatelessWidget {
     final pages = [
       HomePage(width: width),
       Gamespage(width: width),
-      NewHotPage(),
+      NewHotPage(width: width,),
       MyNetflixPage(),
     ];
     return Scaffold(
@@ -34,16 +34,35 @@ class MainScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: width * 0.1),
                 child: Row(
                   children: [
-                    bottomNavObj.index == 0
-                        ? NetflixLogo()
-                        : Text(
-                            "Games",
-                            style: TextStyle(
-                              color: AppColors.whiteColor,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                    if (bottomNavObj.index == 0)
+                      NetflixLogo()
+                    else if (bottomNavObj.index == 1)
+                      Text(
+                        "Games",
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    else if (bottomNavObj.index == 2)
+                      Text(
+                        "New & Hot",
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    else
+                      Text(
+                        "Downloads",
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     Spacer(),
                     if (bottomNavObj.index == 0)
                       IconButton(onPressed: () {}, icon: Icon(Icons.download)),
@@ -83,7 +102,7 @@ class MainScreen extends StatelessWidget {
 
       body: BuildPageWidget(pages: pages),
       extendBodyBehindAppBar: true,
-      bottomNavigationBar: BottomNavBarWidget(isPreviewScreen: false),
+      bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

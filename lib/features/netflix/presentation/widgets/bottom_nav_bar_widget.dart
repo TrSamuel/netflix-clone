@@ -5,8 +5,7 @@ import 'package:netflixclone/features/netflix/presentation/screens/main_screen/m
 import 'package:provider/provider.dart';
 
 class BottomNavBarWidget extends StatelessWidget {
-  final bool isPreviewScreen;
-  const BottomNavBarWidget({super.key, required this.isPreviewScreen});
+  const BottomNavBarWidget({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +14,11 @@ class BottomNavBarWidget extends StatelessWidget {
         currentIndex: instance.index,
         onTap: (index) {
           instance.changeIndex(index);
-          if (isPreviewScreen) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => MainScreen()),
             );
-          }
+          
         },
         type: BottomNavigationBarType.fixed,
         items: [
@@ -28,7 +26,6 @@ class BottomNavBarWidget extends StatelessWidget {
             icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
-          if (!isPreviewScreen)
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.game_controller),
               label: 'Games',

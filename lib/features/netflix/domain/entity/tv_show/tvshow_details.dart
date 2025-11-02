@@ -1,5 +1,3 @@
-
-
 class TvshowDetails {
   final int? id_;
   final String? backdropPath_;
@@ -7,6 +5,7 @@ class TvshowDetails {
   final String? maturityRating_;
   final int? noOfSeasons_;
   final String? name_;
+  final String? creator_;
   final List<String?> casts_;
   final List<String?> genres_;
   final String? originalName_;
@@ -22,6 +21,7 @@ class TvshowDetails {
     required this.genres_,
     required this.originalName_,
     required this.overview_,
+    required this.creator_,
     required this.casts_,
   });
 }

@@ -104,30 +104,59 @@ class Episodes extends StatelessWidget {
                 return SizedBox.shrink();
               }
               final List<Episode> episodes = snapshot.data!;
-              return ListView.builder(
+              return ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: episodes.length,
                 itemBuilder: (context, index) => ListTile(
-                  leading: CachedNetworkImage(
-                    cacheManager: customCacheManager,
-                    width: 100,
-                    height: 50,
-                    memCacheHeight: 50,
-                    memCacheWidth: 100,
-                    imageUrl:
-                        '${Api.imageBaseUrl}/${episodes[index].stillPath_}',
-                    placeholder: (context, url) => Container(),
-                    errorWidget: (context, url, error) => Container(),
-                    fit: BoxFit.cover,
+                  leading: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      CachedNetworkImage(
+                        cacheManager: customCacheManager,
+                        width: 100,
+                        height: 80,
+                        memCacheHeight: 80,
+                        memCacheWidth: 100,
+                        imageUrl:
+                            '${Api.imageBaseUrl}/${episodes[index].stillPath_}',
+                        placeholder: (context, url) => Container(),
+                        errorWidget: (context, url, error) => Container(),
+                        fit: BoxFit.cover,
+                      ),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            width: 30,
+                            height: 30,
+                            alignment: AlignmentGeometry.center,
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.whiteColor,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(500),
+                            ),
+                          ),
+                          Icon(Icons.play_arrow, color: AppColors.whiteColor),
+                        ],
+                      ),
+                    ],
                   ),
-                  title: Text(episodes[index].name_!),
-                  subtitle: Text(
-                    episodes[index].overview_!,
-
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
+                  title: Text('${index + 1}. ${episodes[index].name_!}'),
+                  titleTextStyle: TextStyle(color: AppColors.whiteColor),
+                  subtitle: Text(episodes[index].runTime_!),
+                  subtitleTextStyle: TextStyle(color: AppColors.greyColor),
+                  trailing: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.download),
                   ),
+                ),
+                separatorBuilder: (context, index) => ListTile(
+                  title: Text(episodes[index].overview_!, maxLines: 4),
+                  titleTextStyle: TextStyle(color: AppColors.greyColor),
                 ),
               );
             },
