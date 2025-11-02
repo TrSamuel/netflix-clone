@@ -130,7 +130,7 @@ class ItemRowView extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           )
-                        : SizedBox.shrink();
+                        : SizedBox.shrink(); 
                   },
                   separatorBuilder: (context, index) =>
                       imgStatus ? SizedBox(width: 10) : SizedBox.shrink(),

@@ -19,7 +19,7 @@ class _NewHotPageState extends State<NewHotPage>
       padding: EdgeInsets.only(top: widget.width * 0.25),
       width: double.infinity,
       color: AppColors.otherBgColor,
-      child: Column( 
+      child: Column(
         children: [
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -27,8 +27,44 @@ class _NewHotPageState extends State<NewHotPage>
               children: [
                 ElevatedButton.icon(
                   onPressed: () {},
-                  label: Text("Coming Soon"),
-                  icon: Icon(Icons.icecream),
+                  label: Text(
+                    "Coming Soon",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    
+                    ),
+                  ),
+                  icon: Image.network(
+                    'https://www.nicepng.com/png/detail/16-169469_popcorn-vector-transparent-popcorn-clipart.png',
+                    height: 25,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.whiteColor,
+                    foregroundColor: AppColors.otherBgColor,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: AppColors.whiteColor, width: 1),
+                      borderRadius: BorderRadiusGeometry.circular(45),  
+                    ),
+                  ),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  label: Text(
+                    "Everyone's Watching",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  icon: Image.network(
+                    'https://static.vecteezy.com/system/resources/previews/046/340/349/non_2x/fire-flame-clipart-design-illustration-free-png.png',
+                    height: 25,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.otherBgColor,
+                    foregroundColor: AppColors.whiteColor,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: AppColors.whiteColor, width: 1),
+                      borderRadius: BorderRadiusGeometry.circular(45),  
+                    ),
+                  ),
                 ),
               ],
             ),
