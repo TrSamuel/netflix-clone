@@ -7,7 +7,7 @@ import 'guest_star.dart';
 part 'tv_episode_model.g.dart';
 
 @JsonSerializable()
-class TvEpisodeModel extends Episode{
+class TvEpisodeModel extends Episode {
   @JsonKey(name: 'air_date')
   String? airDate;
   @JsonKey(name: 'episode_number')
@@ -50,11 +50,19 @@ class TvEpisodeModel extends Episode{
     this.voteCount,
     this.crew,
     this.guestStars,
-  }) : super(id_: id, name_: name, overview_: overview, stillPath_: stillPath,runTime_: runtime != null
+  }) : super(
+         id_: id,
+         name_: name,
+         overview_: overview,
+         stillPath_: stillPath,
+         runTime_: runtime != null
              ? (runtime % 60 != 0
-                   ? runtime ~/60!=0? '${runtime ~/ 60}h ${runtime % 60}m': '${runtime % 60}m'
+                   ? runtime ~/ 60 != 0
+                         ? '${runtime ~/ 60}h ${runtime % 60}m'
+                         : '${runtime % 60}m'
                    : '${runtime ~/ 60}h')
-             : 'N/A');
+             : '',
+       );
 
   factory TvEpisodeModel.fromJson(Map<String, dynamic> json) {
     return _$TvEpisodeModelFromJson(json);

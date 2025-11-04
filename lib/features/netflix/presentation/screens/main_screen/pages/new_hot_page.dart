@@ -29,10 +29,7 @@ class _NewHotPageState extends State<NewHotPage>
                   onPressed: () {},
                   label: Text(
                     "Coming Soon",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   icon: Image.network(
                     'https://www.nicepng.com/png/detail/16-169469_popcorn-vector-transparent-popcorn-clipart.png',
@@ -43,28 +40,14 @@ class _NewHotPageState extends State<NewHotPage>
                     foregroundColor: AppColors.otherBgColor,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(color: AppColors.whiteColor, width: 1),
-                      borderRadius: BorderRadiusGeometry.circular(45),  
+                      borderRadius: BorderRadiusGeometry.circular(45),
                     ),
                   ),
                 ),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  label: Text(
-                    "Everyone's Watching",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  icon: Image.network(
-                    'https://static.vecteezy.com/system/resources/previews/046/340/349/non_2x/fire-flame-clipart-design-illustration-free-png.png',
-                    height: 25,
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.otherBgColor,
-                    foregroundColor: AppColors.whiteColor,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color: AppColors.whiteColor, width: 1),
-                      borderRadius: BorderRadiusGeometry.circular(45),  
-                    ),
-                  ),
+                NewHotTabButton(
+                  label: "Everyone's Watching",
+                  image:
+                      'https://static.vecteezy.com/system/resources/previews/046/340/349/non_2x/fire-flame-clipart-design-illustration-free-png.png',
                 ),
               ],
             ),
@@ -76,4 +59,27 @@ class _NewHotPageState extends State<NewHotPage>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class NewHotTabButton extends StatelessWidget {
+  final String image;
+  final String label;
+  const NewHotTabButton({super.key, required this.image, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      onPressed: () {},
+      label: Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
+      icon: Image.network(image, height: 25),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.otherBgColor,
+        foregroundColor: AppColors.whiteColor,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: AppColors.whiteColor, width: 1),
+          borderRadius: BorderRadiusGeometry.circular(45),
+        ),
+      ),
+    );
+  }
 }
