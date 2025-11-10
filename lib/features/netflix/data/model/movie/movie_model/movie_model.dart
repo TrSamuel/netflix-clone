@@ -43,11 +43,14 @@ class MovieModel extends Movie {
     this.video,
     this.voteAverage,
     this.voteCount,
-  }) : super(id_: id, posterPath_: posterPath, title_: title);
+  }) : super(id_: id, posterPath_: posterPath, title_: title,overview_: overview,releaseDate_: getReleaseDate(releaseDate),backdroppath_: backdropPath);
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return _$MovieModelFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$MovieModelToJson(this);
+
+
+ static DateTime? getReleaseDate(String? date)=>date!=null? DateTime.parse(date):null;
 }
