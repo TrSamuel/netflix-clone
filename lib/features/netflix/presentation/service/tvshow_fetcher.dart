@@ -39,6 +39,10 @@ class TvshowFetcher {
         return await getTvShowUseCase(TvShowCategory.trendingWeek);
       case TvShowCategory.onTheAir:
         return await getTvShowUseCase(TvShowCategory.onTheAir);
+      case TvShowCategory.comingSoon:
+       return await getTvShowUseCase(TvShowCategory.comingSoon);
+      case TvShowCategory.family:
+       return await getTvShowUseCase(TvShowCategory.family);
     }
   }
 

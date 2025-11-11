@@ -5,4 +5,6 @@ enum TvShowCategory {
   airingToday,
   trendingDay,
   trendingWeek,
+  comingSoon,
+  family,
 }

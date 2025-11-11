@@ -3,8 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
+import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
+import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher.dart';
+import 'package:netflixclone/features/netflix/presentation/service/tvshow_fetcher.dart';
 
 class NewHotPage extends StatefulWidget {
   final double width;
@@ -17,11 +20,11 @@ class NewHotPage extends StatefulWidget {
 
 class _NewHotPageState extends State<NewHotPage>
     with AutomaticKeepAliveClientMixin {
-  late final Future<List<Movie>> future;
+  late final Future<List<TvShow>> future;
   @override
   void initState() {
     super.initState();
-    future = MovieFetcher.getMovies(MovieCategory.upcoming);
+    future = TvshowFetcher.getTvShows(TvShowCategory.comingSoon);
   }
 
   @override
@@ -37,13 +40,12 @@ class _NewHotPageState extends State<NewHotPage>
           if (!snapshot.hasData || snapshot.hasError) {
             return Center(child: Text("No upcoming movies"));
           }
-          final List<Movie> movies = snapshot.data!;
+          final List<TvShow> tvShows = snapshot.data!;
           return SingleChildScrollView(
             child: Column(
               children: List.generate(
-                movies.length,
-                (index) => movies[index].releaseDate_ != null
-                    ? Column(
+                tvShows.length,
+                (index) =>  Column(
                         children: [
                           Row(
                             children: [
@@ -53,13 +55,13 @@ class _NewHotPageState extends State<NewHotPage>
                                     Text(
                                       DateFormat(
                                         'MMM',
-                                      ).format(movies[index].releaseDate_!),
+                                      ).format(tvShows[index].firstAirDate_!),
                                       style: TextStyle(
                                         color: AppColors.whiteColor,
                                       ),
                                     ),
                                     Text(
-                                      "${movies[index].releaseDate_!.day}",
+                                      "${tvShows[index].firstAirDate_!.day}",
                                       style: TextStyle(
                                         color: AppColors.whiteColor,
                                       ),
@@ -71,13 +73,13 @@ class _NewHotPageState extends State<NewHotPage>
                                 child: Column(
                                   children: [
                                     Image.network(
-                                      '${Api.imageBaseUrl}/${movies[index].backdroppath_}',
+                                      '${Api.imageBaseUrl}/${tvShows[index].backdropPath_}',
                                       height: 150,
                                     ),
                                     Row(
                                       children: [
                                         Text(
-                                          movies[index].title_!,
+                                          tvShows[index].!,
                                           style: TextStyle(
                                             color: AppColors.whiteColor,
                                           ),
@@ -92,7 +94,6 @@ class _NewHotPageState extends State<NewHotPage>
                           Container(height: 20),
                         ],
                       )
-                    : SizedBox.shrink(),
               ),
             ),
           );

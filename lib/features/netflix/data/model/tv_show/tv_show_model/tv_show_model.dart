@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 
@@ -47,7 +48,7 @@ class TvShowModel extends TvShow {
     this.voteAverage,
     this.voteCount,
     this.originCountry,
-  }) : super(id_: id, posterPath_: posterPath);
+  }) : super(id_: id, posterPath_: posterPath,backdropPath_: backdropPath,firstAirDate_: firstAirDate!=null?DateTime.parse(firstAirDate):DateTime.now());
 
   factory TvShowModel.fromJson(Map<String, dynamic> json) {
     return _$TvShowModelFromJson(json);

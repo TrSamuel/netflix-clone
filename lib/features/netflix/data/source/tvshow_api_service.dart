@@ -18,39 +18,31 @@ class TvshowApiService {
     try {
       final String url;
 
-      if (category == TvShowCategory.trendingDay ||
-          category == TvShowCategory.trendingWeek) {
-        url = Api.trendingTvBaseUrl;
-      } else {
-        url = Api.tvBaseUrl;
-      }
-
-      final String type;
-
       switch (category) {
         case TvShowCategory.trendingDay:
-          type = 'day';
-          break;
+          url = '${Api.trendingTvBaseUrl}/day?api_key=${Api.key}';
         case TvShowCategory.trendingWeek:
-          type = 'week';
-          break;
-
+          url = '${Api.trendingTvBaseUrl}/week?api_key=${Api.key}';
         case TvShowCategory.airingToday:
-          type = 'airing_today';
-          break;
+          url = '${Api.tvBaseUrl}/airing_today?api_key=${Api.key}';
         case TvShowCategory.onTheAir:
-          type = 'on_the_air';
-          break;
+          url = '${Api.tvBaseUrl}/on_the_air?api_key=${Api.key}';
         case TvShowCategory.popular:
-          type = 'popular';
-          break;
+          url = '${Api.tvBaseUrl}/popular?api_key=${Api.key}';
         case TvShowCategory.topRated:
-          type = 'top_rated';
-          break;
+          url = '${Api.tvBaseUrl}/top_rated?api_key=${Api.key}';
+        case TvShowCategory.family:
+          url = '${Api.discoverTvBaseUrl}?api_key=${Api.key}&with_genres=10751';
+        case TvShowCategory.comingSoon:
+          url =
+              '${Api.discoverTvBaseUrl}?api_key=${Api.key}'
+              '&language=en-US'
+              '&sort_by=first_air_date.asc'
+              '&first_air_date.gte=${DateTime.now().toIso8601String().split('T').first}';
       }
 
       final response = await http.get(
-        Uri.parse('$url/$type?api_key=${Api.key}'),
+        Uri.parse(url),
       );
 
       if (response.statusCode == 200) {
