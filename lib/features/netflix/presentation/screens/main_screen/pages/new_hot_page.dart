@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
-import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
-import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher.dart';
 import 'package:netflixclone/features/netflix/presentation/service/tvshow_fetcher.dart';
 
 class NewHotPage extends StatefulWidget {
@@ -43,58 +40,12 @@ class _NewHotPageState extends State<NewHotPage>
           final List<TvShow> tvShows = snapshot.data!;
           return SingleChildScrollView(
             child: Column(
-              children: List.generate(
-                tvShows.length,
-                (index) =>  Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      DateFormat(
-                                        'MMM',
-                                      ).format(tvShows[index].firstAirDate_!),
-                                      style: TextStyle(
-                                        color: AppColors.whiteColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      "${tvShows[index].firstAirDate_!.day}",
-                                      style: TextStyle(
-                                        color: AppColors.whiteColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                child: Column(
-                                  children: [
-                                    Image.network(
-                                      '${Api.imageBaseUrl}/${tvShows[index].backdropPath_}',
-                                      height: 150,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          tvShows[index].!,
-                                          style: TextStyle(
-                                            color: AppColors.whiteColor,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(height: 20),
-                        ],
-                      )
-              ),
+              children: List.generate(tvShows.length, (index) {
+                final TvShow tvShow = tvShows[index];
+                return tvShow.backdropPath_ != null
+                    ? TvShowItem(tvShow: tvShow)
+                    : SizedBox.shrink();
+              }),
             ),
           );
         },
@@ -104,6 +55,124 @@ class _NewHotPageState extends State<NewHotPage>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class TvShowItem extends StatelessWidget {
+  const TvShowItem({super.key, required this.tvShow});
+
+  final TvShow tvShow;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FirstAirDate(tvShow: tvShow),
+            AboutAndImg(tvShow: tvShow),
+          ],
+        ),
+        Container(height: 20),
+      ],
+    );
+  }
+}
+
+class AboutAndImg extends StatelessWidget {
+  const AboutAndImg({super.key, required this.tvShow});
+
+  final TvShow tvShow;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.sizeOf(context).width * 0.8,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.network(
+            '${Api.imageBaseUrl}/${tvShow.backdropPath_}',
+            height: 180,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 80,
+                  child: Text(
+                    tvShow.name_!,
+                    maxLines: 1,
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                ),
+                Row(
+                  children: [
+                    ActionBtn(
+                      icon: Icons.notifications_none,
+                      label: 'Remind me',
+                    ),
+
+                    ActionBtn(icon: Icons.info, label: 'Info'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ActionBtn extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  const ActionBtn({super.key, required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        children: [
+          Icon(icon, color: AppColors.whiteColor),
+          Text(label, style: TextStyle(color: AppColors.whiteColor)),
+        ],
+      ),
+    );
+  }
+}
+
+class FirstAirDate extends StatelessWidget {
+  const FirstAirDate({super.key, required this.tvShow});
+
+  final TvShow tvShow;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.sizeOf(context).width * 0.2,
+      child: Column(
+        children: [
+          Text(
+            DateFormat('MMM').format(tvShow.firstAirDate_!).toUpperCase(),
+            style: TextStyle(color: AppColors.whiteColor),
+          ),
+          Text(
+            "${tvShow.firstAirDate_!.day}",
+            style: TextStyle(
+              color: AppColors.whiteColor,
+              fontSize: 34,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class NewHotTabButton extends StatelessWidget {

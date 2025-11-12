@@ -38,7 +38,7 @@ class TvshowApiService {
               '${Api.discoverTvBaseUrl}?api_key=${Api.key}'
               '&language=en-US'
               '&sort_by=first_air_date.asc'
-              '&first_air_date.gte=${DateTime.now().toIso8601String().split('T').first}';
+              '&first_air_date.gte=${DateTime.now().add(Duration(days: 1)).toIso8601String().split('T').first}';
       }
 
       final response = await http.get(
