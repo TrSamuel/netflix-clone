@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/theme/app_theme.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_provider.dart';
+import 'package:netflixclone/features/netflix/presentation/provider/newhot_tabs_changer.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/tabbar_view_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/tvseason_selector.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/main_screen.dart';
@@ -20,6 +21,7 @@ class NetflixApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => BottomnavProvider()),
         ChangeNotifierProvider(create: (context) => TabbarViewProvider()),
         ChangeNotifierProvider(create: (context) => TvseasonSelector()),
+        ChangeNotifierProvider(create: (context) => NewhotTabsChanger(),)
       ],
       child: MaterialApp(
         theme: AppTheme.themeData,

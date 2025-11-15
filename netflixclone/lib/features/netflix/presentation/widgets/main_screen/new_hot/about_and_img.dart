@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:netflixclone/features/netflix/core/api/api.dart';
+import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
+import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/new_hot/action_btn.dart';
+
+class AboutAndImg extends StatelessWidget {
+  const AboutAndImg({super.key, required this.tvShow});
+
+  final TvShow tvShow;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width * 0.8,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.network(
+            '${Api.imageBaseUrl}/${tvShow.backdropPath_}',
+            height: 180,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 80,
+                  child: Text(
+                    tvShow.name_!,
+                    maxLines: 1,
+                    style: TextStyle(color: AppColors.whiteColor),
+                  ),
+                ),
+                Row(
+                  children: [
+                    ActionBtn(
+                      icon: Icons.notifications_none,
+                      label: 'Remind me',
+                    ),
+
+                    ActionBtn(icon: Icons.info, label: 'Info'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
