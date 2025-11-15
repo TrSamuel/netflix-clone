@@ -1,0 +1,18 @@
+enum MovieCategory {
+  nowPlaying,
+  popular,
+  topRated,
+  upcoming,
+  trendingDay,
+  trendingWeek,
+  comedy,
+  malayalam,
+  english,
+  romantic,
+  thriller,
+  horror,
+  family,
+  action,
+  animation,
+  scifiFantasy,
+}

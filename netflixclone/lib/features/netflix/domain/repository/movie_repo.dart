@@ -1,0 +1,9 @@
+import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
+import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
+import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
+
+abstract class MovieRepo {
+  Future<List<Movie>> getMovies(MovieCategory category);
+  Future<MovieDetails?> getMovieDetails(int id);
+  Future<List<Movie>> getRecommendMovies(int id);
+}
