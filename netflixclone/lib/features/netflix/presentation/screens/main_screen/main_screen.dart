@@ -8,7 +8,6 @@ import 'package:netflixclone/features/netflix/presentation/screens/main_screen/p
 import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/build_page_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/new_hot/new_hot_tab_bars.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/new_hot/new_hot_tab_button.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/netflix_logo.dart';
 import 'package:provider/provider.dart';
 

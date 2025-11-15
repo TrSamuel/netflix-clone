@@ -86,7 +86,7 @@ class AboutAndImg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.sizeOf(context).width * 0.8,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,7 +153,7 @@ class FirstAirDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.sizeOf(context).width * 0.2,
       child: Column(
         children: [
