@@ -47,7 +47,7 @@ class TvShowModel extends TvShow {
     this.voteAverage,
     this.voteCount,
     this.originCountry,
-  }) : super(id_: id,name_: name,  posterPath_: posterPath,backdropPath_: backdropPath,firstAirDate_: firstAirDate!=null?DateTime.parse(firstAirDate):DateTime.now());
+  }) : super(id_: id,name_: name,  posterPath_: posterPath,backdropPath_: backdropPath,firstAirDate_: firstAirDate!=null?DateTime.parse(firstAirDate):DateTime.now(),overview_: overview);
 
   factory TvShowModel.fromJson(Map<String, dynamic> json) {
     return _$TvShowModelFromJson(json);

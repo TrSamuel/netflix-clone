@@ -3,6 +3,7 @@ import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 
 class AppTheme {
   static ThemeData themeData = ThemeData(
+    scaffoldBackgroundColor: AppColors.otherBgColor,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.bottomNavBgColor,
       selectedItemColor: AppColors.whiteColor,
