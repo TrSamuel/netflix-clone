@@ -21,7 +21,7 @@ class NetflixApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => BottomnavProvider()),
         ChangeNotifierProvider(create: (context) => TabbarViewProvider()),
         ChangeNotifierProvider(create: (context) => TvseasonSelector()),
-        ChangeNotifierProvider(create: (context) => NewhotTabProvider(),)
+        ChangeNotifierProvider(create: (context) => NewhotTabProvider(),) 
       ],
       child: MaterialApp(
         theme: AppTheme.themeData,

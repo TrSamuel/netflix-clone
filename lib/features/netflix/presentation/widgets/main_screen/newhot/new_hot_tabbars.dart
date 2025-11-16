@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/newhot/new_hot_tab_button.dart';
 
 class NewHotTabbars extends StatelessWidget {
-  const NewHotTabbars({
-    super.key,
-  });
+  const NewHotTabbars({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +14,7 @@ class NewHotTabbars extends StatelessWidget {
             index: 0,
             label: "Coming Soon",
             image:
-                'https://drive.google.com/u/0/drive-viewer/AKGpihZYHjj2zWpX8OHNp4oqzXhvTww7HxzoScEX4pSt7CMBP48APw9PdEiSm1G5wxJ2Urf_bcs1G2H-EnhKbii4Z63lQB8PsJMOjQ=s2560',
+                'https://www.pngmart.com/files/3/Popcorn-Transparent-PNG.png',
           ),
           NewHotTabButton(
             index: 1,

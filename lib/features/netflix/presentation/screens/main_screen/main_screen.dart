@@ -65,14 +65,13 @@ class MainScreen extends StatelessWidget {
                         ),
                       ),
                     Spacer(),
-                    if (bottomNavObj.index == 0)
+                    if (bottomNavObj.index == 0 || bottomNavObj.index == 2)
                       IconButton(onPressed: () {}, icon: Icon(Icons.download)),
                     IconButton(onPressed: () {}, icon: Icon(Icons.search)),
                   ],
                 ),
               ),
-              if (bottomNavObj.index == 2)
-                NewHotTabbars(),
+              if (bottomNavObj.index == 2) NewHotTabbars(),
             ],
           ),
         ),
