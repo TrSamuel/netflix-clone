@@ -51,31 +51,6 @@ class HeroCardHome extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Row(
-                  children: List.generate(
-                    4,
-                    (index) => Row(
-                      children: [
-                        Text(
-                          "Category${index + 1}",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        SizedBox(width: 5),
-
-                        if (index != 3)
-                          Container(
-                            width: 3,
-                            height: 3,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(500),
-                            ),
-                          ),
-                        if (index != 3) SizedBox(width: 5),
-                      ],
-                    ),
-                  ),
-                ),
-                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     HeroCardActionButton(

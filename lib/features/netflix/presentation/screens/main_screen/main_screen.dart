@@ -70,32 +70,6 @@ class MainScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              if (bottomNavObj.index == 0)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ...List.generate(
-                      2,
-                      (index) => Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: OutlinedButton(
-                          onPressed: () {},
-                          child: Text("Shows"),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: OutlinedButton.icon(
-                        iconAlignment: IconAlignment.end,
-                        icon: Icon(Icons.keyboard_arrow_down),
-                        onPressed: () {},
-                        label: Text("Categories"),
-                      ),
-                    ),
-                  ],
-                ),
-
               if (bottomNavObj.index == 2)
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

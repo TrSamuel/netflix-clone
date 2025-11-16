@@ -114,7 +114,6 @@ class AboutAndImg extends StatelessWidget {
                       icon: Icons.notifications_none,
                       label: 'Remind me',
                     ),
-
                     ActionBtn(icon: Icons.info, label: 'Info'),
                   ],
                 ),
@@ -168,6 +167,7 @@ class FirstAirDate extends StatelessWidget {
               fontSize: 34,
               fontWeight: FontWeight.bold,
             ),
+            
           ),
         ],
       ),
