@@ -6,6 +6,7 @@ class GameModel extends Game {
     required super.title,
     required super.thumbnail,
     required super.genre,
+    required super.descr
   });
 
   factory GameModel.fromJson(Map<String, dynamic> json) => GameModel(
@@ -13,5 +14,6 @@ class GameModel extends Game {
     title: json['title'] ?? '',
     thumbnail: json['thumbnail'] ?? '',
     genre: json['genre'] ?? '',
+    descr: json['short_description']?? '',
   );
 }

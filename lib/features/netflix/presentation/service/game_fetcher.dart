@@ -1,12 +1,16 @@
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/data/repository/game_repo_imp.dart';
 import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
+import 'package:netflixclone/features/netflix/domain/entity/game/game_details.dart';
+import 'package:netflixclone/features/netflix/domain/usecase/get_gamedetails.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/get_games.dart';
 
 class GameFetcher {
   static final GetGames getGamesuseCase = GetGames(
     gameRepo: GameRepoImp.instance,
   );
+
+  static final GetGamedetails getGamedetailUse=GetGamedetails(gameRepo: GameRepoImp.instance);
 
   static Future<List<Game>> getGames(GameCategory category) async {
     switch (category) {
@@ -38,4 +42,6 @@ class GameFetcher {
         return await getGamesuseCase(GameCategory.all);
     }
   }
+
+  static Future<GameDetails?> getGamedetails(int id) async => await getGamedetailUse(id);
 }

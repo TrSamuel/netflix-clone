@@ -12,4 +12,5 @@ class Api {
   static const imageBaseUrl = 'https://image.tmdb.org/t/p/w300';
   static const gamesBaseUrl = 'https://www.freetogame.com/api/games';
   static const gamesFindUrl = 'https://www.freetogame.com/api/games?category';
+  static const gameDetailsUrl='https://www.freetogame.com/api/game';
 }

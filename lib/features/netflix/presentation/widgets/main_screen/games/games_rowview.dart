@@ -4,8 +4,11 @@ import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
+import 'package:netflixclone/features/netflix/domain/entity/game/game_details.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_provider.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/game_details_screen/game_details_screen.dart';
 import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/custom_nav.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/dummy_items_game.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/loading_item_container.dart';
 import 'package:provider/provider.dart';
@@ -86,18 +89,36 @@ class GamesRowview extends StatelessWidget {
                         SizedBox(width: 10),
                         Column(
                           children: [
-                            CachedNetworkImage(
-                              cacheManager: customCacheManager,
-                              width: 100,
-                              height: 100,
-                              memCacheHeight: 200,
-                              memCacheWidth: 200,
-                              imageUrl: gamesList[index].thumbnail,
-                              placeholder: (context, url) =>
-                                  LoadingItemContainer(),
-                              errorWidget: (context, url, error) =>
-                                  LoadingItemContainer(),
-                              fit: BoxFit.cover,
+                            GestureDetector(
+                              onTap: () async {
+                                final GameDetails? gameDetails =
+                                    await GameFetcher.getGamedetails(
+                                      gamesList[index].id,
+                                    );
+                                if (gameDetails != null) {
+                                  Navigator.push(
+                                    context,
+                                    CustomNav(
+                                      page: GameDetailsScreen(
+                                        gameDetails: gameDetails,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
+                              child: CachedNetworkImage(
+                                cacheManager: customCacheManager,
+                                width: 100,
+                                height: 100,
+                                memCacheHeight: 200,
+                                memCacheWidth: 200,
+                                imageUrl: gamesList[index].thumbnail,
+                                placeholder: (context, url) =>
+                                    LoadingItemContainer(),
+                                errorWidget: (context, url, error) =>
+                                    LoadingItemContainer(),
+                                fit: BoxFit.cover,
+                              ),
                             ),
 
                             SizedBox(

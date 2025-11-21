@@ -3,11 +3,12 @@ class Game {
   final String title;
   final String thumbnail;
   final String genre;
+  final String descr;
 
   Game({
     required this.id,
     required this.title,
     required this.thumbnail,
-    required this.genre,
+    required this.genre, required this.descr,
   });
 }

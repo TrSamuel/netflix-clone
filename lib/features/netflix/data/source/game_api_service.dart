@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
+import 'package:netflixclone/features/netflix/data/model/game/game_details_model.dart';
 import 'package:netflixclone/features/netflix/data/model/game/game_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -67,5 +68,33 @@ class GameApiService {
       debugPrint('Failed to fetch ${cateogry.name} games: $e');
       return [];
     }
+  }
+
+  Future<GameDetailsModel?> getGameDetails(int id) async {
+    try {
+      final response = await http.get(
+        Uri.parse('${Api.gameDetailsUrl}?id=$id'),
+      );
+
+      if (response.statusCode == 200) {
+        debugPrint('game details got successful');
+
+        final json = jsonDecode(response.body);
+
+        return GameDetailsModel.fromJson(json);
+      }
+      if (response.statusCode == 404) {
+        debugPrint('game details not found');
+        return null;
+      }
+      if (response.statusCode == 500) {
+        debugPrint('fetch game details- server error');
+         return null;
+      }
+    } catch (e) {
+      debugPrint('Failed to fetch game details: $e');
+      return null;
+    }
+    return null;
   }
 }
