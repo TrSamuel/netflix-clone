@@ -62,6 +62,10 @@ class GameApiService {
       if (response.statusCode == 500) {
         debugPrint('${cateogry.name} Games- server error');
       }
+       if (response.statusCode == 522) {
+        debugPrint('${cateogry.name} Games- Connection Timed Out');
+      }
+
 
       return [];
     } catch (e) {

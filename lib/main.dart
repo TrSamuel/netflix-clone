@@ -5,10 +5,10 @@ import 'package:netflixclone/features/netflix/presentation/provider/newhot_tab_p
 import 'package:netflixclone/features/netflix/presentation/provider/tabbar_view_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/tvseason_selector.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/main_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart'; 
 
 main() {
-  runApp(NetflixApp());
+  runApp(NetflixApp());  
 }
 
 class NetflixApp extends StatelessWidget {
