@@ -82,7 +82,7 @@ class TvShowItem extends StatelessWidget {
                   "$position",
                   style: GoogleFonts.archivoBlack(
                     color: AppColors.whiteColor,
-                    fontSize: 34,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

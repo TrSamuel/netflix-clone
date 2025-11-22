@@ -40,15 +40,14 @@ class _Top10MoviesState extends State<Top10Movies>
           final List<Movie> movies = snapshot.data!;
           return SingleChildScrollView(
             child: Column(
-              children: List.generate(
-                movies.length < 10 ? movies.length : 10,
-                (index) {
-                  final Movie movie = movies[index];
-                  return movie.backdroppath_ != null
-                      ? MovieShowItem(movie: movie, position: index + 1)
-                      : SizedBox.shrink();
-                },
-              ),
+              children: List.generate(movies.length < 10 ? movies.length : 10, (
+                index,
+              ) {
+                final Movie movie = movies[index];
+                return movie.backdroppath_ != null
+                    ? MovieShowItem(movie: movie, position: index + 1)
+                    : SizedBox.shrink();
+              }),
             ),
           );
         },
@@ -82,7 +81,7 @@ class MovieShowItem extends StatelessWidget {
                   "$position",
                   style: GoogleFonts.archivoBlack(
                     color: AppColors.whiteColor,
-                    fontSize: 34,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

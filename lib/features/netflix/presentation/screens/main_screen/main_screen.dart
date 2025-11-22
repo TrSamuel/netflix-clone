@@ -80,6 +80,7 @@ class MainScreen extends StatelessWidget {
       body: BuildPageWidget(pages: pages),
       extendBodyBehindAppBar: true,
       bottomNavigationBar: BottomNavBarWidget(),
+      
     );
   }
 }

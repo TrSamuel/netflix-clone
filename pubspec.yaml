@@ -41,6 +41,7 @@ dependencies:
   json_annotation: ^4.9.0
   intl: ^0.20.2
   google_fonts: ^6.3.2
+  dominant_color_detector: ^0.0.2
 
 dev_dependencies:
   flutter_test:
