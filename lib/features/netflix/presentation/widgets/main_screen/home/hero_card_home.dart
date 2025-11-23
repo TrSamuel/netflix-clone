@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dominant_color_detector/dominant_color_detector.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
@@ -26,8 +25,7 @@ class _HeroCardHomeState extends State<HeroCardHome> {
   late final Future future;
   @override
   void initState() {
-    context.read<BgcolorChanger>().defaultColor();
-    future = MovieFetcher.getMovies(MovieCategory.trendingWeek);
+    future = MovieFetcher.getMovies(MovieCategory.trendingDay);
     super.initState();
   }
 

@@ -22,13 +22,6 @@ class BgcolorChanger extends ChangeNotifier {
     return result.first.color.color;
   }
 
-  defaultColor() async {
-    bgcolor = await setColor(
-      'https://image.tmdb.org/t/p/original/j6M2odS1RqGEUPKirIvB1VZ9i6Y.jpg',
-    );
-    notifyListeners();
-  }
-
   changeColor(String url) async {
     bgcolor = await setColor(url);
     notifyListeners();
