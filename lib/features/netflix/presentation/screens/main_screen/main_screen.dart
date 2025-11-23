@@ -5,6 +5,7 @@ import 'package:netflixclone/features/netflix/presentation/screens/main_screen/p
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/home_page.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/my_netflix_page.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/new_hot_page.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/search_screen/seach_screen.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/build_page_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/newhot/new_hot_tabbars.dart';
@@ -67,7 +68,9 @@ class MainScreen extends StatelessWidget {
                     Spacer(),
                     if (bottomNavObj.index == 0 || bottomNavObj.index == 2)
                       IconButton(onPressed: () {}, icon: Icon(Icons.download)),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+                    IconButton(onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SeachScreen(),));
+                    }, icon: Icon(Icons.search)),
                   ],
                 ),
               ),
