@@ -7,19 +7,32 @@ class BgcolorChanger extends ChangeNotifier {
 
   Future<Color> setColor(String url) async {
     final imgBytes = await fetchImageBytes(url);
+
     List<DominantColorStat> result = await DominantColorDetector.analyze(
       imgBytes,
     );
-    result = result.where((domColor) {
-      return domColor.color.color.computeLuminance() > 0.3;
+
+    result = result.where((dom) {
+      return dom.color.color.computeLuminance() < 0.65;
     }).toList();
 
-    result.sort(
-      (a, b) => a.color.color.computeLuminance().compareTo(
-        b.color.color.computeLuminance(),
-      ),
-    );
-    return result.first.color.color;
+    result = result.where((dom) {
+      final hsl = HSLColor.fromColor(dom.color.color);
+      return !(hsl.hue >= 10 && hsl.hue <= 50);
+    }).toList();
+
+    if (result.isEmpty) {
+      return AppColors.homeBgColor;
+    }
+
+    Color pick = result.first.color.color;
+
+    HSLColor hsl = HSLColor.fromColor(pick);
+    if (hsl.lightness > 0.4) {
+      hsl = hsl.withLightness(0.25);
+    }
+
+    return hsl.toColor();
   }
 
   changeColor(String url) async {

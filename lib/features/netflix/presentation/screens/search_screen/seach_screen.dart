@@ -115,7 +115,7 @@ class RecommendShowsMovies extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: 10),
-                        Container(
+                        SizedBox(
                           width: 150,
                           child: Text(
                             movie.title_!,

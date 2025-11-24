@@ -78,36 +78,38 @@ class _HeroCardHomeState extends State<HeroCardHome> {
                   ),
                 ),
               ),
-              Container(
-                width: widget.width * 0.85,
-                height: 500,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    stops: [0.4, 1],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, AppColors.otherBgColor],
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        HeroCardActionButton(
-                          icon: Icons.play_arrow,
-                          isDark: false,
-                          label: "Play",
-                        ),
-                        HeroCardActionButton(
-                          icon: Icons.add,
-                          isDark: true,
-                          label: "My List",
-                        ),
-                      ],
+              Consumer<BgcolorChanger>(
+                builder: (context, bg, child) =>  Container(
+                  width: widget.width * 0.85,
+                  height: 500,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      stops: [0.4, 1],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.transparent, bg.bgcolor],
                     ),
-                  ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          HeroCardActionButton(
+                            icon: Icons.play_arrow,
+                            isDark: false,
+                            label: "Play",
+                          ),
+                          HeroCardActionButton(
+                            icon: Icons.add,
+                            isDark: true,
+                            label: "My List",
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

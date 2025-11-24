@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
@@ -9,6 +11,7 @@ import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.
 import 'package:netflixclone/features/netflix/presentation/widgets/custom_nav.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/dummy_items_game.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/loading_item_container.dart';
+import 'package:stroke_text/stroke_text.dart';
 
 class GamesRowviewtop10 extends StatelessWidget {
   const GamesRowviewtop10({super.key});
@@ -55,12 +58,18 @@ class GamesRowviewtop10 extends StatelessWidget {
                         Stack(
                           alignment: Alignment.bottomLeft,
                           children: [
-                            Text(
-                              "${index + 1}",
-
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 54,
+                            SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: StrokeText(
+                                strokeWidth: 1,
+                                text: "${index + 1}",
+                                strokeColor: AppColors.whiteColor,
+                                textStyle: GoogleFonts.anton(
+                                  fontSize: 104,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.transparent,
+                                ),
                               ),
                             ),
                             Padding(

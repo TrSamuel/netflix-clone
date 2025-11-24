@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
+import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
@@ -17,6 +19,7 @@ import 'package:netflixclone/features/netflix/presentation/widgets/custom_nav.da
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/dummy_items_home.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/loading_item_container.dart';
 import 'package:provider/provider.dart';
+import 'package:stroke_text/stroke_text.dart';
 
 class ItemRowViewTop10 extends StatelessWidget {
   final MovieCategory? movieCategory;
@@ -73,19 +76,26 @@ class ItemRowViewTop10 extends StatelessWidget {
                       imgStatus =
                           (rowItemList[index] as Movie).posterPath_!.isNotEmpty;
                     } else {
-                      imgStatus =
-                          (rowItemList[index] as TvShow).posterPath_!.isNotEmpty;
+                      imgStatus = (rowItemList[index] as TvShow)
+                          .posterPath_!
+                          .isNotEmpty;
                     }
                     return imgStatus
                         ? Stack(
                             alignment: Alignment.bottomLeft,
                             children: [
-                              Text(
-                                "${index + 1}",
-
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 54,
+                              SizedBox(
+                                width: 100,
+                                height: 150,
+                                child: StrokeText(
+                                  strokeWidth: 1,
+                                  text: "${index + 1}",
+                                  strokeColor: AppColors.whiteColor,
+                                  textStyle: GoogleFonts.anton(
+                                    fontSize: 104,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.transparent,
+                                  ),
                                 ),
                               ),
                               Padding(

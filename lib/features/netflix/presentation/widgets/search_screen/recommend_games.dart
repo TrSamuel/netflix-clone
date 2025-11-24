@@ -59,7 +59,7 @@ class RecommendGames extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 100,
                           child: Text(
                             games[index].title,
