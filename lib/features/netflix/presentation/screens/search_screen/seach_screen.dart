@@ -3,17 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
-import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
-import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
-import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
-import 'package:netflixclone/features/netflix/presentation/screens/moviedetails_screen/movie_details_screen.dart';
-import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.dart';
-import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/custom_nav.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/games_rowview.dart';
+import 'package:netflixclone/features/netflix/presentation/provider/search_provider.dart';
+import 'package:netflixclone/features/netflix/presentation/service/search.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/recommend_games.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/recommend_shows_movies.dart';
+import 'package:provider/provider.dart';
 
 class SeachScreen extends StatelessWidget {
   const SeachScreen({super.key});
@@ -27,6 +22,14 @@ class SeachScreen extends StatelessWidget {
         bottom: PreferredSize(
           preferredSize: Size(MediaQuery.sizeOf(context).width, 50),
           child: SearchBar(
+            textStyle: WidgetStatePropertyAll(
+              TextStyle(color: AppColors.whiteColor),
+            ),
+            onChanged: (query) {
+              if (query.trim().isNotEmpty) {
+                context.read<SearchProvider>().getQuery(query);
+              }
+            },
             hintText: 'Search games,shows,mo...',
             hintStyle: WidgetStatePropertyAll(
               TextStyle(color: AppColors.greyColor),
@@ -47,109 +50,55 @@ class SeachScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(children: [RecommendGames(), RecommendShowsMovies()]),
-      ),
-    );
-  }
-}
+        child: Consumer<SearchProvider>(
+          builder: (context, search, child) => search.query.isEmpty
+              ? Column(children: [RecommendGames(), RecommendShowsMovies()])
+              : FutureBuilder(
+                  future: Search.movies(search.query),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData ||
+                        snapshot.hasError ||
+                        snapshot.data!.isEmpty) {
+                      return Text(
+                        "No movies",
+                        style: TextStyle(color: AppColors.whiteColor),
+                      );
+                    }
 
-class RecommendShowsMovies extends StatelessWidget {
-  const RecommendShowsMovies({super.key});
+                    final List<Movie> movies = snapshot.data!;
 
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: MovieFetcher.getMovies(MovieCategory.trendingDay),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData || snapshot.hasError || snapshot.data!.isEmpty) {
-          return SizedBox.shrink();
-        }
-        final List<Movie> movies = snapshot.data!;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Text(
-                "Recommended Shows & Movies",
-                style: TextStyle(
-                  color: AppColors.whiteColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Wrap(
+                        children: List.generate(movies.length, (index) {
+                          final movie = movies[index];
+
+                          return (movie.posterPath_ == null ||
+                                  movie.posterPath_!.isNotEmpty)
+                              ? Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    width: 100,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: CachedNetworkImageProvider(
+                                          cacheManager: customCacheManager,
+                                          '${Api.imageBaseUrl}/${movie.posterPath_}',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : SizedBox.shrink();
+                        }),
+                      ),
+                    );
+                  },
                 ),
-              ),
-            ),
-            Column(
-              children: List.generate(movies.length, (index) {
-                final movie = movies[index];
-                return Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: InkWell(
-                    onTap: () async {
-                      final MovieDetails? movieDetails =
-                          await MovieFetcher.getMovieDetails(movie.id_!);
-                      if (movieDetails != null) {
-                        Navigator.push(
-                          context,
-                          CustomNav(
-                            page: MovieDetailsScreen(
-                              movieDetails: movieDetails,
-                            ),
-                          ),
-                        );
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 150,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: CachedNetworkImageProvider(
-                                '${Api.imageBaseUrl}/${movie.backdroppath_!}',
-                                cacheManager: customCacheManager,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        SizedBox(
-                          width: 150,
-                          child: Text(
-                            movie.title_!,
-                            style: TextStyle(
-                              color: AppColors.whiteColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        Spacer(),
-                        Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(
-                              width: 1,
-                              color: AppColors.whiteColor,
-                            ),
-                          ),
-                          child: Icon(
-                            Icons.play_arrow,
-                            color: AppColors.whiteColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ],
-        );
-      },
+        ),
+      ),
     );
   }
 }

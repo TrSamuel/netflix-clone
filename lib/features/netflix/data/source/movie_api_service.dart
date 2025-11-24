@@ -147,4 +147,43 @@ class MovieApiService {
       return [];
     }
   }
+
+Future<List<MovieModel>> searchMovies(String query) async {
+    try {
+      final String url =
+          '${Api.searchBaseUrl}/movie?api_key=${Api.key}&query=$query';
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        debugPrint('search movies : successful response');
+
+        final json = jsonDecode(response.body);
+
+        final results = json['results'] as List;
+
+        return results.map((json) => MovieModel.fromJson(json)).toList();
+      }
+      if (response.statusCode == 401) {
+        debugPrint(
+          ' Cannot fetch movies by searching, because of invalid api key',
+        );
+      }
+       if (response.statusCode == 404) {
+        debugPrint(
+          ' Cannot fetch movies by searching, because of image not provided',
+        );
+      }
+      if (response.statusCode == 503) {
+        debugPrint(
+          'search  movies: This service is temporarily offline, try again later.',
+        );
+      }
+
+      return [];
+    } catch (e) {
+      debugPrint('Failed to fetch  movies  by search: $e');
+      return [];
+    }
+  }
+  
 }

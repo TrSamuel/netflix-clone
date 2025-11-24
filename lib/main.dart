@@ -3,6 +3,7 @@ import 'package:netflixclone/features/netflix/core/theme/app_theme.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bgcolor_changer.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/newhot_tab_provider.dart';
+import 'package:netflixclone/features/netflix/presentation/provider/search_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/tabbar_view_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/tvseason_selector.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/main_screen.dart';
@@ -23,7 +24,8 @@ class NetflixApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => TabbarViewProvider()),
         ChangeNotifierProvider(create: (context) => TvseasonSelector()),
         ChangeNotifierProvider(create: (context) => NewhotTabProvider(),) ,
-        ChangeNotifierProvider(create: (context) => BgcolorChanger(),)
+        ChangeNotifierProvider(create: (context) => BgcolorChanger(),),
+        ChangeNotifierProvider(create: (context) => SearchProvider(),)
       ],
       child: MaterialApp(
         theme: AppTheme.themeData,
