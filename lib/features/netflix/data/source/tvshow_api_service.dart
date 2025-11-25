@@ -166,4 +166,44 @@ class TvshowApiService {
       return [];
     }
   }
+
+
+
+Future<List<TvShowModel>> searchTvshows(String query) async {
+    try {
+      final String url =
+          '${Api.searchBaseUrl}/tv?api_key=${Api.key}&query=$query';
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        debugPrint('search tvshows : successful response');
+
+        final json = jsonDecode(response.body);
+
+        final results = json['results'] as List;
+
+        return results.map((json) => TvShowModel.fromJson(json)).toList();
+      }
+      if (response.statusCode == 401) {
+        debugPrint(
+          ' Cannot fetch tvshows by searching, because of invalid api key',
+        );
+      }
+       if (response.statusCode == 404) {
+        debugPrint(
+          ' Cannot fetch tvshows by searching, because of image not provided',
+        );
+      }
+      if (response.statusCode == 503) {
+        debugPrint(
+          'search  tvshows: This service is temporarily offline, try again later.',
+        );
+      }
+
+      return [];
+    } catch (e) {
+      debugPrint('Failed to fetch  tvshows  by search: $e');
+      return [];
+    }
+  }
 }

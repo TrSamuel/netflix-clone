@@ -4,8 +4,9 @@ import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
+import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/search_provider.dart';
-import 'package:netflixclone/features/netflix/presentation/service/search.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/compined_view.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/recommend_games.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/recommend_shows_movies.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ class SeachScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final searchController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.otherBgColor,
@@ -22,13 +24,12 @@ class SeachScreen extends StatelessWidget {
         bottom: PreferredSize(
           preferredSize: Size(MediaQuery.sizeOf(context).width, 50),
           child: SearchBar(
+            controller: searchController,
             textStyle: WidgetStatePropertyAll(
               TextStyle(color: AppColors.whiteColor),
             ),
             onChanged: (query) {
-              if (query.trim().isNotEmpty) {
-                context.read<SearchProvider>().getQuery(query);
-              }
+              context.read<SearchProvider>().getQuery(query);
             },
             hintText: 'Search games,shows,mo...',
             hintStyle: WidgetStatePropertyAll(
@@ -40,10 +41,21 @@ class SeachScreen extends StatelessWidget {
             shape: WidgetStatePropertyAll(LinearBorder()),
             leading: Icon(Icons.search, color: AppColors.greyColor),
             trailing: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.mic_none_outlined),
-                color: AppColors.greyColor,
+              Consumer<SearchProvider>(
+                builder: (context, search, _) => search.isSearching
+                    ? IconButton(
+                        onPressed: () {
+                          searchController.clear();
+                          search.clear();
+                        },
+                        icon: Icon(Icons.close),
+                        color: AppColors.greyColor,
+                      )
+                    : IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.mic_none_outlined),
+                        color: AppColors.greyColor,
+                      ),
               ),
             ],
           ),
@@ -51,51 +63,57 @@ class SeachScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Consumer<SearchProvider>(
-          builder: (context, search, child) => search.query.isEmpty
+          builder: (context, search, child) => !search.isSearching
               ? Column(children: [RecommendGames(), RecommendShowsMovies()])
-              : FutureBuilder(
-                  future: Search.movies(search.query),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData ||
-                        snapshot.hasError ||
-                        snapshot.data!.isEmpty) {
-                      return Text(
-                        "No movies",
-                        style: TextStyle(color: AppColors.whiteColor),
-                      );
-                    }
-
-                    final List<Movie> movies = snapshot.data!;
-
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Wrap(
-                        children: List.generate(movies.length, (index) {
-                          final movie = movies[index];
-
-                          return (movie.posterPath_ == null ||
-                                  movie.posterPath_!.isNotEmpty)
-                              ? Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    width: 100,
-                                    height: 150,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: CachedNetworkImageProvider(
-                                          cacheManager: customCacheManager,
-                                          '${Api.imageBaseUrl}/${movie.posterPath_}',
-                                        ),
-                                      ),
-                                    ),
+              : Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: search.movies.isNotEmpty || search.tvShows.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 5),
+                              child: Text(
+                                "Movies & TV",
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            CompinedView(search: search),
+                          ],
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Oops. We haven't got that.",
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                "Try searching for another movies, shows, actor, director or genre",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: const Color.fromARGB(
+                                    255,
+                                    122,
+                                    122,
+                                    122,
                                   ),
-                                )
-                              : SizedBox.shrink();
-                        }),
-                      ),
-                    );
-                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                 ),
         ),
       ),

@@ -11,4 +11,6 @@ abstract class TvshowRepo {
   Future<List<Episode>> getEpisodes(int seriesId, int seasonId);
 
   Future<List<TvShow>> getrecommendTvShows(int id);
+
+  Future<List<TvShow>> searchTvshows(String query);
 }

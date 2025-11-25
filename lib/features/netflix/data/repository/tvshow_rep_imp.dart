@@ -29,4 +29,8 @@ class TvshowRepImp extends TvshowRepo {
   @override
   Future<List<Episode>> getEpisodes(int seriesId, int seasonId) async =>
       await tvSource.getEpisodes(seriesId, seasonId);
+
+  @override
+  Future<List<TvShow>> searchTvshows(String query) async =>
+      await tvSource.searchTvshows(query);
 }

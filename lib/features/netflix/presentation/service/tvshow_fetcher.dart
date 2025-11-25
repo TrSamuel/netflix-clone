@@ -3,10 +3,10 @@ import 'package:netflixclone/features/netflix/data/repository/tvshow_rep_imp.dar
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/episode.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
-import 'package:netflixclone/features/netflix/domain/usecase/get_episodes.dart';
-import 'package:netflixclone/features/netflix/domain/usecase/get_recommendtvshows.dart';
-import 'package:netflixclone/features/netflix/domain/usecase/get_tvshowdetails.dart';
-import 'package:netflixclone/features/netflix/domain/usecase/get_tvshows.dart';
+import 'package:netflixclone/features/netflix/domain/usecase/tvshow/get_episodes.dart';
+import 'package:netflixclone/features/netflix/domain/usecase/tvshow/get_recommendtvshows.dart';
+import 'package:netflixclone/features/netflix/domain/usecase/tvshow/get_tvshowdetails.dart';
+import 'package:netflixclone/features/netflix/domain/usecase/tvshow/get_tvshows.dart';
 
 class TvshowFetcher {
   static final GetTvshows getTvShowUseCase = GetTvshows(
