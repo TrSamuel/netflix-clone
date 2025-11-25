@@ -20,4 +20,7 @@ class GameRepoImp extends GameRepo {
 
   @override
   Future<GameDetails?> getGameDetails(int id) async => await _gameApiService.getGameDetails(id);
+  
+  @override
+  Future<List<Game>> searchgames(String query) async =>await _gameApiService.searchGames(query);
 }

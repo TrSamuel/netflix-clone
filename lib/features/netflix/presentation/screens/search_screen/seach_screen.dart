@@ -1,12 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
-import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/search_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/compined_view.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/empty_message.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/game_view.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/recommend_games.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/search_screen/recommend_shows_movies.dart';
 import 'package:provider/provider.dart';
@@ -67,53 +64,52 @@ class SeachScreen extends StatelessWidget {
               ? Column(children: [RecommendGames(), RecommendShowsMovies()])
               : Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: search.movies.isNotEmpty || search.tvShows.isNotEmpty
+                  child: search.combined.isNotEmpty || search.games.isNotEmpty
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 5),
-                              child: Text(
-                                "Movies & TV",
-                                style: TextStyle(
-                                  color: AppColors.whiteColor,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            if (search.games.isNotEmpty)
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 8,
+                                      bottom: 5,
+                                    ),
+                                    child: Text(
+                                      "Games",
+                                      style: TextStyle(
+                                        color: AppColors.whiteColor,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  GameView(search: search),
+                                ],
                               ),
-                            ),
-                            CompinedView(search: search),
+                            if (search.combined.isNotEmpty)
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: Text(
+                                      "Movies & TV",
+                                      style: TextStyle(
+                                        color: AppColors.whiteColor,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  CompinedView(search: search),
+                                ],
+                              ),
                           ],
                         )
-                      : Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Oops. We haven't got that.",
-                                style: TextStyle(
-                                  color: AppColors.whiteColor,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                "Try searching for another movies, shows, actor, director or genre",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: const Color.fromARGB(
-                                    255,
-                                    122,
-                                    122,
-                                    122,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      : EmptyMessage(),
                 ),
         ),
       ),

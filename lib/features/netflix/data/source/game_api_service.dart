@@ -5,6 +5,7 @@ import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/data/model/game/game_details_model.dart';
 import 'package:netflixclone/features/netflix/data/model/game/game_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
 
 class GameApiService {
   GameApiService.internal();
@@ -62,10 +63,9 @@ class GameApiService {
       if (response.statusCode == 500) {
         debugPrint('${cateogry.name} Games- server error');
       }
-       if (response.statusCode == 522) {
+      if (response.statusCode == 522) {
         debugPrint('${cateogry.name} Games- Connection Timed Out');
       }
-
 
       return [];
     } catch (e) {
@@ -93,12 +93,44 @@ class GameApiService {
       }
       if (response.statusCode == 500) {
         debugPrint('fetch game details- server error');
-         return null;
+        return null;
       }
     } catch (e) {
       debugPrint('Failed to fetch game details: $e');
       return null;
     }
     return null;
+  }
+
+  Future<List<GameModel>> searchGames(String query) async {
+    try {
+      final response = await http.get(Uri.parse(Api.gamesBaseUrl));
+
+      if (response.statusCode == 200) {
+        debugPrint('search games : successful response');
+
+        final searchedList = (jsonDecode(response.body) as List).map((json) => GameModel.fromJson(json))
+            .toList();
+        return searchedList
+            .where(
+              (game) => game.title.toLowerCase().startsWith(query.toString()),
+            )
+            .toList();
+      }
+      if (response.statusCode == 404) {
+        debugPrint('search Games not found.');
+      }
+      if (response.statusCode == 500) {
+        debugPrint('search Games- server error');
+      }
+      if (response.statusCode == 522) {
+        debugPrint('search Games- Connection Timed Out');
+      }
+
+      return [];
+    } catch (e) {
+      debugPrint('Failed to fetch search games: $e');
+      return [];
+    }
   }
 }

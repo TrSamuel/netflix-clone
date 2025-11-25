@@ -5,4 +5,5 @@ import 'package:netflixclone/features/netflix/domain/entity/game/game_details.da
 abstract class GameRepo {
   Future<List<Game>> getGames(GameCategory category);
   Future<GameDetails?>  getGameDetails(int id);
+  Future<List<Game>>  searchgames(String query);
 }

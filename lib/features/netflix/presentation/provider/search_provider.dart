@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/utils/debouncer.dart';
+import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/presentation/service/search.dart';
@@ -7,6 +8,7 @@ import 'package:netflixclone/features/netflix/presentation/service/search.dart';
 class SearchProvider extends ChangeNotifier {
   List<Movie> movies = [];
   List<TvShow> tvShows = [];
+  List<Game>  games=[];
   List<Object> combined = [];
   bool isSearching = false;
 
@@ -18,6 +20,7 @@ class SearchProvider extends ChangeNotifier {
         isSearching = true;
         movies = await Search.movies(query);
         tvShows = await Search.tvshows(query);
+        games=await Search.games(query);
         combined = [...movies, ...tvShows];
         notifyListeners();
       });
@@ -26,6 +29,7 @@ class SearchProvider extends ChangeNotifier {
       movies = [];
       tvShows = [];
       combined = [];
+      games=[];
       notifyListeners();
     }
   }
@@ -35,6 +39,7 @@ class SearchProvider extends ChangeNotifier {
     movies = [];
     tvShows = [];
     combined = [];
+    games=[];
     notifyListeners();
   }
 }
