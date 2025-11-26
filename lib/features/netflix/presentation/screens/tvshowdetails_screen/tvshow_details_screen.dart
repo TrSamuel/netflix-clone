@@ -4,13 +4,10 @@ import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tvshow_details.dart';
-import 'package:netflixclone/features/netflix/presentation/provider/tvseason_selector.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/main_action_button.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/starring.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/user_choice_action_button.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/tvshowdetails_screen/episodes_recommends.dart';
-import 'package:provider/provider.dart';
 
 class TvshowDetailsScreen extends StatelessWidget {
   final TvshowDetails tvshowDetails;

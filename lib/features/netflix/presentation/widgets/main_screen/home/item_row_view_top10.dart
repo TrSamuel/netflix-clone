@@ -10,7 +10,6 @@ import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie.dart
 import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie_details.dart';
 import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tvshow_details.dart';
-import 'package:netflixclone/features/netflix/presentation/provider/download_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/tvseason_selector.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/moviedetails_screen/movie_details_screen.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/tvshowdetails_screen/tvshow_details_screen.dart';

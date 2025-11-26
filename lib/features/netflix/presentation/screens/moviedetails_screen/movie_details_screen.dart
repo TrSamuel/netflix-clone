@@ -9,7 +9,6 @@ import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_ba
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/main_action_button.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/starring.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/recommends_movies.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/user_choice_action_button.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
