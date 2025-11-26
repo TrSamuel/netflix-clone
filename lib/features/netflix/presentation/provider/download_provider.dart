@@ -9,6 +9,7 @@ class DownloadProvider extends ChangeNotifier {
 
   addMovie(MovieDetails movie) async {
      await Download.dowloadMovie(movie);
+      await isMoviedownloaded(movie.id_!);
      getMovies();
   }
 
@@ -17,8 +18,13 @@ class DownloadProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-   isMoviedownloaded(int id) async {
+   isMoviedownloaded(int id)  {
     movieStatus=Download.isMovieDowload(id);
     notifyListeners();
+   }
+
+   delMovie(int id) async {
+    await Download.remove(id);
+    getMovies();
    }
 }

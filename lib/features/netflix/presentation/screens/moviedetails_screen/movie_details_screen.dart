@@ -12,21 +12,38 @@ import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_
 import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/user_choice_action_button.dart';
 import 'package:provider/provider.dart';
 
-class MovieDetailsScreen extends StatelessWidget {
+class MovieDetailsScreen extends StatefulWidget {
   final MovieDetails movieDetails;
   const MovieDetailsScreen({super.key, required this.movieDetails});
 
   @override
+  State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
+}
+
+class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<DownloadProvider>().isMoviedownloaded(
+        widget.movieDetails.id_!,
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.download)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+            // IconButton(onPressed: () {}, icon: Icon(Icons.download)),
+            // IconButton(onPressed: () {}, icon: Icon(Icons.search)),
           ],
         ),
         backgroundColor: AppColors.otherBgColor,
@@ -39,12 +56,13 @@ class MovieDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
-                imageUrl: '${Api.imageBaseUrl}/${movieDetails.backdropPath_!}',
+                imageUrl:
+                    '${Api.imageBaseUrl}/${widget.movieDetails.backdropPath_!}',
                 placeholder: (context, url) => Container(
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      movieDetails.originalTitle_!,
+                      widget.movieDetails.originalTitle_!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -58,7 +76,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   color: AppColors.otherBgColor,
                   child: Center(
                     child: Text(
-                      movieDetails.originalTitle_!,
+                      widget.movieDetails.originalTitle_!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.bold,
@@ -76,7 +94,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movieDetails.title_!,
+                      widget.movieDetails.title_!,
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontSize: 28,
@@ -89,28 +107,28 @@ class MovieDetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${movieDetails.releaseDate_!.year}',
+                            '${widget.movieDetails.releaseDate_!.year}',
                             style: TextStyle(color: AppColors.whiteColor),
                           ),
                           Container(
                             color: AppColors.greyColor,
                             padding: EdgeInsets.all(2),
                             child: Text(
-                              movieDetails.maturityRating_!.isNotEmpty
-                                  ? movieDetails.maturityRating_!
+                              widget.movieDetails.maturityRating_!.isNotEmpty
+                                  ? widget.movieDetails.maturityRating_!
                                   : 'U/A 16+',
                               style: TextStyle(color: AppColors.whiteColor),
                             ),
                           ),
                           Text(
-                            movieDetails.runTime_!,
+                            widget.movieDetails.runTime_!,
                             style: TextStyle(color: AppColors.whiteColor),
                           ),
                         ],
                       ),
                     ),
                     Text(
-                      "Watch in ${movieDetails.languages_.take(2).join(' and ')}",
+                      "Watch in ${widget.movieDetails.languages_.take(2).join(' and ')}",
                       style: TextStyle(color: AppColors.whiteColor),
                     ),
                     MainActionButton(
@@ -121,46 +139,50 @@ class MovieDetailsScreen extends StatelessWidget {
                       bgColor: AppColors.whiteColor,
                       fgColor: AppColors.otherBgColor,
                     ),
-                    MainActionButton(
-                      onTap: () {
-                        context.read<DownloadProvider>().addMovie(movieDetails);
-                      },
-                      width: width,
-                      icon: Icons.download,
-                      label: 'Download',
-                      bgColor: const Color.fromARGB(255, 41, 41, 41),
-                      fgColor: AppColors.whiteColor,
+                    Consumer<DownloadProvider>(
+                      builder: (context, download, child) => MainActionButton(
+                        onTap: () {
+                          download.addMovie(widget.movieDetails);
+                        },
+                        width: width,
+                        icon: download.movieStatus
+                            ? Icons.download_done
+                            : Icons.download,
+                        label: download.movieStatus ? 'Downloaded' : 'Download',
+                        bgColor: const Color.fromARGB(255, 41, 41, 41),
+                        fgColor: AppColors.whiteColor,
+                      ),
                     ),
                     Text(
-                      movieDetails.overview_!,
+                      widget.movieDetails.overview_!,
                       style: TextStyle(
                         fontSize: 16,
                         color: AppColors.whiteColor,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Starring(movieDetails: movieDetails),
+                    Starring(movieDetails: widget.movieDetails),
                     Text(
-                      "Director: ${movieDetails.director_!}",
+                      "Director: ${widget.movieDetails.director_!}",
                       style: TextStyle(color: AppColors.greyColor),
                     ),
                     Row(
                       children: [
-                        UserChoiceActionButton(
-                          icon: Icons.add,
-                          label: 'My List',
-                        ),
-                        UserChoiceActionButton(
-                          icon: Icons.thumb_up_alt_outlined,
-                          label: 'Rate',
-                        ),
-                        UserChoiceActionButton(
-                          icon: Icons.share,
-                          label: 'Share',
-                        ),
+                        // UserChoiceActionButton(
+                        //   icon: Icons.add,
+                        //   label: 'My List',
+                        // ),
+                        // UserChoiceActionButton(
+                        //   icon: Icons.thumb_up_alt_outlined,
+                        //   label: 'Rate',
+                        // ),
+                        // UserChoiceActionButton(
+                        //   icon: Icons.share,
+                        //   label: 'Share',
+                        // ),
                       ],
                     ),
-                    RecommendsMovies(movieDetails: movieDetails),
+                    RecommendsMovies(movieDetails: widget.movieDetails),
                   ],
                 ),
               ),

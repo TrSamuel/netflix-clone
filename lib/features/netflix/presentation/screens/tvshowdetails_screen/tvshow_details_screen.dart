@@ -25,8 +25,8 @@ class TvshowDetailsScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.download)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+            // IconButton(onPressed: () {}, icon: Icon(Icons.download)),
+            // IconButton(onPressed: () {}, icon: Icon(Icons.search)),
           ],
         ),
         backgroundColor: AppColors.otherBgColor,
@@ -106,9 +106,7 @@ class TvshowDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     MainActionButton(
-                      onTap: () {
-                        
-                      },
+                      onTap: () {},
                       width: width,
                       icon: Icons.play_arrow,
                       label: 'Play',
@@ -116,9 +114,7 @@ class TvshowDetailsScreen extends StatelessWidget {
                       fgColor: AppColors.otherBgColor,
                     ),
                     MainActionButton(
-                      onTap: () {
-                        
-                      },
+                      onTap: () {},
                       width: width,
                       icon: Icons.download,
                       label: 'Download',
@@ -137,25 +133,25 @@ class TvshowDetailsScreen extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        UserChoiceActionButton(
-                          icon: Icons.add,
-                          label: 'My List',
-                        ),
-                        UserChoiceActionButton(
-                          icon: Icons.thumb_up_alt_outlined,
-                          label: 'Rate',
-                        ),
-                        UserChoiceActionButton(
-                          icon: Icons.share,
-                          label: 'Share',
-                        ),
-                        Consumer<TvseasonSelector>(
-                          builder: (context, instance, child) =>
-                              UserChoiceActionButton(
-                                icon: Icons.download,
-                                label: 'Download\nSeason ${instance.seasonNo}',
-                              ),
-                        ),
+                        // UserChoiceActionButton(
+                        //   icon: Icons.add,
+                        //   label: 'My List',
+                        // ),
+                        // UserChoiceActionButton(
+                        //   icon: Icons.thumb_up_alt_outlined,
+                        //   label: 'Rate',
+                        // ),
+                        // UserChoiceActionButton(
+                        //   icon: Icons.share,
+                        //   label: 'Share',
+                        // ),
+                        // Consumer<TvseasonSelector>(
+                        //   builder: (context, instance, child) =>
+                        //       UserChoiceActionButton(
+                        //         icon: Icons.download,
+                        //         label: 'Download\nSeason ${instance.seasonNo}',
+                        //       ),
+                        // ),
                       ],
                     ),
                     EpisodesRecommends(tvshowDetails: tvshowDetails),

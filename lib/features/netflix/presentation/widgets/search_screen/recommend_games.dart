@@ -3,21 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/domain/entity/api/game/game.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/game/game_details.dart';
+import 'package:netflixclone/features/netflix/presentation/screens/game_details_screen/game_details_screen.dart';
 import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/custom_nav.dart';
 
 class RecommendGames extends StatelessWidget {
-  const RecommendGames({
-    super.key,
-  });
+  const RecommendGames({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: GameFetcher.getGames(GameCategory.all),
       builder: (context, snapshot) {
-        if (!snapshot.hasData ||
-            snapshot.hasError ||
-            snapshot.data!.isEmpty) {
+        if (!snapshot.hasData || snapshot.hasError || snapshot.data!.isEmpty) {
           return SizedBox.shrink();
         }
         final List<Game> games = snapshot.data!;
@@ -44,33 +43,47 @@ class RecommendGames extends StatelessWidget {
                   games.length > 15 ? 15 : games.length,
                   (index) => Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: CachedNetworkImageProvider(
-                                games[index].thumbnail,
+                    child: GestureDetector(
+                      onTap: () async {
+                        final GameDetails? gameDetails =
+                            await GameFetcher.getGamedetails(games[index].id);
+                        if (gameDetails != null) {
+                          Navigator.push(
+                            context,
+                            CustomNav(
+                              page: GameDetailsScreen(gameDetails: gameDetails),
+                            ),
+                          );
+                        }
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: CachedNetworkImageProvider(
+                                  games[index].thumbnail,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 100,
-                          child: Text(
-                            games[index].title,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.whiteColor,
+                          SizedBox(
+                            width: 100,
+                            child: Text(
+                              games[index].title,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.whiteColor,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

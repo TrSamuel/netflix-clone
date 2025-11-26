@@ -4,6 +4,7 @@ import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bgcolor_changer.dart';
+import 'package:netflixclone/features/netflix/presentation/provider/download_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/games_rowview.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/games/games_rowviewtop10.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/home/hero_card_home.dart';
@@ -22,6 +23,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<DownloadProvider>().getMovies();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);

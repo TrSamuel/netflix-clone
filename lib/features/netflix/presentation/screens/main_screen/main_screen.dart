@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/bottomnav_provider.dart';
-import 'package:netflixclone/features/netflix/presentation/screens/download_screen/dowload_screen.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/gamespage.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/home_page.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/main_screen/pages/my_netflix_page.dart';
@@ -71,12 +70,6 @@ class MainScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           bottomNavObj.changeIndex(3);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DowloadScreen(),
-                            ),
-                          );
                         },
                         icon: Icon(Icons.download),
                       ),

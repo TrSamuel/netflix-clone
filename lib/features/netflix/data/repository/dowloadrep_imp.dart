@@ -21,4 +21,7 @@ class DowloadrepImp extends DowloadRepo {
   @override
   bool isMovieDownloaded(int id) =>downloads.isMovieDowloaded(id);
   
+  @override
+  delMovie(int id) async =>await downloads.removeMovie(id);
+  
 }

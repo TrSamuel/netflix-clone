@@ -5,4 +5,5 @@ abstract class DowloadRepo {
   Future<void>  dowloadMovie(MovieDetails movie);
   Future<List<MovieD>>  getMovies();
   bool isMovieDownloaded(int id);
+  delMovie(int id);
 }

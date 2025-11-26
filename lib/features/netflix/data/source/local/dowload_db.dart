@@ -26,12 +26,12 @@ class DowloadDb {
         backdropPath_: movie.backdropPath ?? '',
         title_: movie.title ?? '',
       );
-      await movieBox.put(movieDModel.id, movieDModel);
+      await movieBox.put(movieDModel.id_, movieDModel);
       debugPrint("movie ${movie.title} is downloaded");
     } catch (e) {
       debugPrint("error to dowload movie: $e");
     }
-  }
+  } 
 
   Future<List<MovieDModel>> getMovies() async {
     try {
@@ -43,4 +43,13 @@ class DowloadDb {
   }
 
   bool isMovieDowloaded(int id) => movieBox.containsKey(id);
+
+  removeMovie(int id) async {
+    try {
+      await movieBox.delete(id);
+      debugPrint("movie deleted");
+    } catch (e) {
+      debugPrint("error to delete movie: $e");
+    }
+  }
 }
