@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
-import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
 import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
 import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/search_provider.dart';

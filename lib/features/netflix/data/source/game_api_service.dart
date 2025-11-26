@@ -5,7 +5,6 @@ import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/data/model/game/game_details_model.dart';
 import 'package:netflixclone/features/netflix/data/model/game/game_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
 
 class GameApiService {
   GameApiService.internal();
@@ -109,11 +108,14 @@ class GameApiService {
       if (response.statusCode == 200) {
         debugPrint('search games : successful response');
 
-        final searchedList = (jsonDecode(response.body) as List).map((json) => GameModel.fromJson(json))
+        final searchedList = (jsonDecode(response.body) as List)
+            .map((json) => GameModel.fromJson(json))
             .toList();
         return searchedList
             .where(
-              (game) => game.title.toLowerCase().startsWith(query.toString()),
+              (game) =>
+                  game.title.toLowerCase().startsWith(query.toLowerCase()) ||
+                  game.genre.toLowerCase().startsWith(query.toLowerCase()),
             )
             .toList();
       }
