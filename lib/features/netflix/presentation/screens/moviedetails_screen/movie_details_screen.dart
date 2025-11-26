@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie_details.dart';
+import 'package:netflixclone/features/netflix/presentation/provider/download_provider.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/main_action_button.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/starring.dart';
-import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/trailer_and_recommends.dart';
+import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/recommends_movies.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/moviedetails_screen/user_choice_action_button.dart';
+import 'package:provider/provider.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   final MovieDetails movieDetails;
@@ -112,6 +114,7 @@ class MovieDetailsScreen extends StatelessWidget {
                       style: TextStyle(color: AppColors.whiteColor),
                     ),
                     MainActionButton(
+                      onTap: () {},
                       width: width,
                       icon: Icons.play_arrow,
                       label: 'Play',
@@ -119,10 +122,13 @@ class MovieDetailsScreen extends StatelessWidget {
                       fgColor: AppColors.otherBgColor,
                     ),
                     MainActionButton(
+                      onTap: () {
+                        context.read<DownloadProvider>().addMovie(movieDetails);
+                      },
                       width: width,
                       icon: Icons.download,
                       label: 'Download',
-                      bgColor: AppColors.greyColor,
+                      bgColor: const Color.fromARGB(255, 41, 41, 41),
                       fgColor: AppColors.whiteColor,
                     ),
                     Text(
@@ -154,7 +160,7 @@ class MovieDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    TrailerAndRecommends(movieDetails: movieDetails),
+                    RecommendsMovies(movieDetails: movieDetails),
                   ],
                 ),
               ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tvshow_details.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/tvseason_selector.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/bottom_nav_bar_widget.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/main_action_button.dart';
@@ -106,6 +106,9 @@ class TvshowDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     MainActionButton(
+                      onTap: () {
+                        
+                      },
                       width: width,
                       icon: Icons.play_arrow,
                       label: 'Play',
@@ -113,10 +116,13 @@ class TvshowDetailsScreen extends StatelessWidget {
                       fgColor: AppColors.otherBgColor,
                     ),
                     MainActionButton(
+                      onTap: () {
+                        
+                      },
                       width: width,
                       icon: Icons.download,
                       label: 'Download',
-                      bgColor: AppColors.greyColor,
+                      bgColor: const Color.fromARGB(255, 41, 41, 41),
                       fgColor: AppColors.whiteColor,
                     ),
                     Text(

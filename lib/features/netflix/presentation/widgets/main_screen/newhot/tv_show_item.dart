@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/newhot/about_and_img.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/newhot/first_air_date.dart';
 

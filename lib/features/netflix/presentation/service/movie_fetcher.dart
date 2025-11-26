@@ -1,6 +1,6 @@
 import 'package:netflixclone/features/netflix/data/repository/movie_repo_imp.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie_details.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/movie/get_moviedetails.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/movie/get_movies.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';

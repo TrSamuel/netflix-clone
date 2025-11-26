@@ -1,9 +1,9 @@
 import 'package:netflixclone/features/netflix/data/repository/game_repo_imp.dart';
 import 'package:netflixclone/features/netflix/data/repository/movie_repo_imp.dart';
 import 'package:netflixclone/features/netflix/data/repository/tvshow_rep_imp.dart';
-import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/game/game.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/game/search_games.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/movie/search_movies.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/tvshow/search_tvshows.dart';

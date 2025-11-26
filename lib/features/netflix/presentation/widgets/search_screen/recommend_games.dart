@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
-import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/game/game.dart';
 import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.dart';
 
 class RecommendGames extends StatelessWidget {

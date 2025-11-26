@@ -1,7 +1,7 @@
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
 import 'package:netflixclone/features/netflix/data/repository/game_repo_imp.dart';
-import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
-import 'package:netflixclone/features/netflix/domain/entity/game/game_details.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/game/game.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/game/game_details.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/game/get_gamedetails.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/game/get_games.dart';
 

@@ -1,8 +1,8 @@
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
 import 'package:netflixclone/features/netflix/data/repository/tvshow_rep_imp.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/episode.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/episode.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tv_show.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tvshow_details.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/tvshow/get_episodes.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/tvshow/get_recommendtvshows.dart';
 import 'package:netflixclone/features/netflix/domain/usecase/tvshow/get_tvshowdetails.dart';

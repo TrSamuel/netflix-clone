@@ -1,4 +1,4 @@
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie.dart';
 import 'package:netflixclone/features/netflix/domain/repository/movie_repo.dart';
 
 class SearchMovies {

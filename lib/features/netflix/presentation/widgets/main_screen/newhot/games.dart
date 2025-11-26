@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
 import 'package:netflixclone/features/netflix/core/utils/game_category.dart';
-import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/game/game.dart';
 import 'package:netflixclone/features/netflix/presentation/service/game_fetcher.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/newhot/action_btn.dart';
 

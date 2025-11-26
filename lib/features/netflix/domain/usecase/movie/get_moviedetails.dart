@@ -1,4 +1,4 @@
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie_details.dart';
 import 'package:netflixclone/features/netflix/domain/repository/movie_repo.dart';
 
 class GetMoviedetails {

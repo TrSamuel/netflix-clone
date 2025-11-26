@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/tv_show_category.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/presentation/service/tvshow_fetcher.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/newhot/tv_show_item.dart';
 

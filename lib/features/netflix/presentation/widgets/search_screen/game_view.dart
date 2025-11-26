@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/utils/cache_manager.dart';
-import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/game/game.dart';
 import 'package:netflixclone/features/netflix/presentation/provider/search_provider.dart';
 
 class GameView extends StatelessWidget {

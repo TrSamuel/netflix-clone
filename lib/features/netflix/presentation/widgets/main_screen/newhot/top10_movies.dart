@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:netflixclone/features/netflix/core/api/api.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
 import 'package:netflixclone/features/netflix/core/utils/movie_category.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie.dart';
 import 'package:netflixclone/features/netflix/presentation/service/movie_fetcher.dart';
 import 'package:netflixclone/features/netflix/presentation/widgets/main_screen/newhot/action_btn.dart';
 

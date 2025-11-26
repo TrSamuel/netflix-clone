@@ -5,13 +5,14 @@ class MainActionButton extends StatelessWidget {
   final String label;
   final Color bgColor;
   final Color fgColor;
+  final VoidCallback onTap;
   const MainActionButton({
     super.key,
     required this.width,
     required this.icon,
     required this.label,
     required this.bgColor,
-    required this.fgColor,
+    required this.fgColor, required this.onTap,
   });
 
   final double width;
@@ -25,7 +26,7 @@ class MainActionButton extends StatelessWidget {
         foregroundColor: fgColor,
         fixedSize: Size.fromWidth(width),
       ),
-      onPressed: () {},
+      onPressed: onTap,
       label: Text(label),
       icon: Icon(icon),
     );

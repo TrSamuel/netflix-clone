@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tv_show.dart';
 
 class FirstAirDate extends StatelessWidget {
   const FirstAirDate({super.key, required this.tvShow});

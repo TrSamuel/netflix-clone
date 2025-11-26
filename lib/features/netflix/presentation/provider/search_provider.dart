@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/utils/debouncer.dart';
-import 'package:netflixclone/features/netflix/domain/entity/game/game.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tv_show.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/game/game.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tv_show.dart';
 import 'package:netflixclone/features/netflix/presentation/service/search.dart';
 
 class SearchProvider extends ChangeNotifier {

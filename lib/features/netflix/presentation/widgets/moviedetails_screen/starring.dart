@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/features/netflix/core/color/app_colors.dart';
-import 'package:netflixclone/features/netflix/domain/entity/movie/movie_details.dart';
-import 'package:netflixclone/features/netflix/domain/entity/tv_show/tvshow_details.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/movie/movie_details.dart';
+import 'package:netflixclone/features/netflix/domain/entity/api/tv_show/tvshow_details.dart';
 import 'package:netflixclone/features/netflix/presentation/screens/more_view_screen/movie_moreview_screen.dart';
 
 class Starring extends StatelessWidget {
